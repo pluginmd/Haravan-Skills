@@ -1,11 +1,19 @@
 # Haravan Operational AI Skills (`haravan-ops-skills`)
 
-Bộ **88 Canonical AI Agent Skills chuẩn hóa toàn diện** để thiết lập, cấu hình, kiểm toán, vận hành và tối ưu cửa hàng trên nền tảng **Haravan (`haravan.com`)**, được chia tách rành mạch thành **2 kênh thực thi độc lập**:
+**Tác giả:** **Nguyễn Ngọc Tuấn** — *Founder, Transform Group*
+
+> **Đúc kết tinh hoa vận hành bán lẻ & thương mại điện tử đa kênh thực chiến với nền tảng Haravan (`haravan.com`).**  
+> Đây không chỉ là tập tài liệu hướng dẫn, mà là **hệ điều hành AI Agent hoàn chỉnh** gói gọn toàn bộ kinh nghiệm triển khai, quản trị và tối ưu doanh nghiệp bán lẻ Việt Nam trên Haravan — từ khâu khởi tạo cửa hàng, cấu hình 17 phân hệ quản trị, chuẩn hóa catalog & tồn kho đa chi nhánh, kiểm soát bom hàng & đối soát COD (GHN, GHTK, Viettel Post, J&T, Ahamove), chăm sóc khách hàng Phone-First CRM / Zalo ZNS / Haraloyalty, đến báo cáo tài chính, thuế GTGT/HĐĐT và trực chiến Mega Sale.
+
+Bộ **88 Canonical AI Agent Skills chuẩn hóa toàn diện** được chia tách rành mạch thành **2 kênh thực thi độc lập**:
 
 1. **Loại 1 — `skills/api-mcp/` (62 skills, `requires_token: true`):** Chạy qua **Haravan REST API (`/com/`, `/web/`), CLI Runner (`scripts/hrv_ops.py`), MCP Server (`mcp/haravan_mcp_server.py`) hoặc `@haravan/cli`** — yêu cầu `HARAVAN_ACCESS_TOKEN`.
 2. **Loại 2 — `skills/browser-ui/` (26 skills, `requires_token: false`):** Thao tác trực tiếp trên **trình duyệt Haravan Admin (`*.myharavan.com/admin`)** — không cần API token, chỉ cần người dùng đăng nhập trình duyệt; toàn bộ đường dẫn URL, 17 mục Cấu hình và nút bấm đã được **khảo sát xác minh trực tiếp trên Haravan Admin thật** với 4–5 kịch bản thao tác chuột chi tiết mỗi skill.
 
-> Kế thừa chuẩn kiến trúc từ hệ sinh thái Shopify AI Skills (`Shopify/shopify-ai-toolkit`, `Shopify/agent-skills`, `storehand/storehand`, `40RTY-ai/shopify-admin-skills`, `Pikka-Shopify/Pikka-shopify-skills`), đồng thời được **thiết kế lại 100% cho Haravan REST Omni/Web API, Haravan Liquid, `@haravan/cli` và đặc thù vận hành TMĐT Việt Nam** (đối soát COD, GHN/GHTK/Viettel Post/J&T/Ahamove, định danh SĐT `+84`/`0`, đa kênh Haraweb/Harasocial/POS/Shopee/Lazada/TikTok Shop, Zalo OTP/ZNS, Thuế GTGT & Hóa đơn điện tử).
+### Vì sao bộ kỹ năng này tạo ra khác biệt khi vận hành Haravan?
+- **100% Thuần Haravan & Thực chiến Việt Nam:** Thiết kế chuẩn xác cho Haravan Omni REST API (`/com/`), Online Store Web API (`/web/`), Haravan Liquid, `@haravan/cli`, Webhooks HMAC-SHA256 và toàn bộ hệ sinh thái Haraweb — Harasocial — HaraRetail POS — Sàn TMĐT (Shopee, Lazada, TikTok Shop).
+- **An toàn chuẩn sản xuất (Zero-Accident Guardrails):** Read-Only mặc định ở tầng L1, bắt buộc `dry_run: true` + backup JSON/CSV ở tầng L2, xác nhận lượt riêng (`separate_turn: true`) ở tầng L3, và **Screenshot-Before-Save** trên trình duyệt Admin.
+- **Sẵn sàng dùng ngay (Turnkey Execution):** Đi kèm sẵn Python Client chống lỗi 429 (`hrv_client.py`), CLI 11 lệnh (`hrv_ops.py`), MCP Server (`haravan_mcp_server.py`), 3 SOP Playbooks (Khai trương, Daily/Weekly, Mega Sale) và 16 lịch vận hành tự động.
 
 ---
 
@@ -35,7 +43,7 @@ Bộ **88 Canonical AI Agent Skills chuẩn hóa toàn diện** để thiết l�
 haravan-ops-skills/
 ├── README.md                              # Tài liệu tổng quan, hướng dẫn & danh mục đầy đủ 88 skills
 ├── AGENTS.md                              # Quy tắc an toàn bắt buộc cho AI Agent vận hành Haravan
-├── RESEARCH.md                            # Báo cáo kỹ thuật Haravan vs Shopify & chuyển đổi nghiệp vụ VN
+├── RESEARCH.md                            # Kiến trúc kỹ thuật & Tinh hoa vận hành Haravan Omnichannel
 ├── registry.json                          # Chỉ mục tổng hợp 88 skills (auto-generated)
 ├── registry-api-mcp.json                  # Chỉ mục 62 skills chạy qua API / MCP / CLI (Cần Token)
 ├── registry-browser-ui.json               # Chỉ mục 26 skills thao tác trình duyệt Admin UI (Không cần Token)

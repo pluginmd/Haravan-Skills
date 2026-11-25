@@ -45,7 +45,7 @@ rollback:
 
 Skill `L1 / read` thực hiện kiểm toán toàn diện 6 hạng mục sống còn trước khi một cửa hàng Haravan tại Việt Nam chính thức chạy quảng cáo (Facebook/TikTok/Google) hoặc mở bán (Go-Live). Thực tế nhiều shop mới khai trương bị khóa tài khoản quảng cáo, rớt đơn thanh toán hoặc bị khách phản ánh vì thiếu trang chính sách bắt buộc theo Nghị định 52/2013/NĐ-CP (Bộ Công Thương), quên trỏ tên miền SSL, chưa có kho mặc định hoạt động, hoặc thiếu mã tracking.
 
-- **Khi nào sử dụng:** Trước ngày khai trương cửa hàng mới, sau khi chuyển nền tảng (migration từ Shopify/WooCommerce/Sapo sang Haravan), hoặc trước khi mở rộng thêm kênh bán mới.
+- **Khi nào sử dụng:** Trước ngày khai trương cửa hàng mới, sau khi chuyển dữ liệu từ nền tảng TMĐT khác sang Haravan, hoặc trước khi mở rộng thêm kênh bán mới.
 - **Khi nào KHÔNG sử dụng:** Khi cửa hàng đã vận hành ổn định lâu ngày và cần theo dõi sức khỏe đơn hàng/tồn kho hàng tuần (dùng `store-health-check`).
 - **Definition of Done (DoD):**
   1. Thu thập đầy đủ dữ liệu từ 6 endpoint read-only (`shop`, `locations`, `products/count`, `web/pages`, `web/themes`, `web/script_tags`).

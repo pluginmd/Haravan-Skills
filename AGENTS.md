@@ -1,5 +1,7 @@
 # AGENTS.md — Quy tắc bắt buộc cho AI Agent vận hành Haravan
 
+> **Tác giả:** Nguyễn Ngọc Tuấn — Founder, Transform Group
+
 Tài liệu này quy định **luật bắt buộc** cho mọi AI Agent (Antigravity, Claude Code, Cursor, Codex, MCP client) khi làm việc với repository `haravan-ops-skills` và kết nối tới cửa hàng Haravan (`*.myharavan.com` / `apis.haravan.com`).
 
 ---

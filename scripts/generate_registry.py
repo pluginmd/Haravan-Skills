@@ -136,6 +136,7 @@ def build_registry(skills: List[Dict[str, Any]] | None = None, track: str = "all
     items = collect_skills() if skills is None else skills
     return {
         "schema_version": "1.1.0",
+        "author": "Nguyễn Ngọc Tuấn, Founder Transform Group",
         "platform": "haravan.com",
         "track": track,
         "total_skills": len(items),

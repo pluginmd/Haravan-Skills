@@ -1,56 +1,55 @@
-# RESEARCH.md — Kiến trúc kỹ thuật Haravan & Chuyển đổi từ Hệ sinh thái Shopify Skills
+# RESEARCH.md — Kiến trúc Kỹ thuật & Tinh hoa Vận hành Haravan Omnichannel
 
-Báo cáo này tổng hợp kết quả nghiên cứu nền tảng **Haravan (`haravan.com`)**, đối chiếu trực tiếp với hệ sinh thái AI Agent Skills của Shopify (`Shopify/shopify-ai-toolkit`, `Shopify/agent-skills`, `storehand/storehand`, `40RTY-ai/shopify-admin-skills`, `Pikka-Shopify/Pikka-shopify-skills`) và khảo sát trực tiếp giao diện **Haravan Admin sống (`*.myharavan.com/admin`)**, từ đó định hình bộ **88 Canonical Operational Skills** (gồm **62 skills `api-mcp`** cần token và **26 skills `browser-ui`** thao tác trình duyệt Admin không cần token).
+> **Tác giả:** Nguyễn Ngọc Tuấn — Founder, Transform Group  
+> **Bộ kỹ năng:** `haravan-ops-skills` — Đúc kết tinh hoa vận hành bán lẻ & thương mại điện tử đa kênh thực chiến trên nền tảng **Haravan (`haravan.com`)**.
 
----
-
-## 1. Đối chiếu nền tảng: Haravan vs. Shopify
-
-| Khía cạnh | Shopify (2026) | Haravan (Omni / Haraweb) | Hệ quả thiết kế cho bộ Skills |
-| :--- | :--- | :--- | :--- |
-| **API Architecture** | GraphQL Admin API (REST đã là legacy) | **REST Omni API** (`/com/*.json`) & **Web API** (`/web/*.json`) | **REST-first**; chuẩn hóa pagination (`page`, `limit`, `since_id`), field filtering (`fields=...`) |
-| **Base Endpoints** | `https://{shop}.myshopify.com/admin/api/{ver}/graphql.json` | `https://apis.haravan.com/com/` & `https://apis.haravan.com/web/` | Tách rõ 2 surface `com` (Admin/Omni) và `web` (Theme/Pages/Blogs/Redirects/ScriptTags) |
-| **Authentication** | Client Credentials Grant (24h) / OAuth2 | **Private App Bearer Token** hoặc **OAuth2 (`offline_access`)** | Header `Authorization: Bearer <TOKEN>`, hỗ trợ refresh token cho Public/Custom App |
-| **Access Scopes** | `read_products`, `write_orders`, ... | Namespace rõ ràng: `com.read_*`, `com.write_*`, `web.read_*`, `web.write_*`, `wh_api` | Mapping least-privilege scopes chính xác theo từng endpoint |
-| **Rate Limiting** | GraphQL Cost Points (calculated query cost) | **Leaky Bucket: 80 requests, leak rate 4 req/s**, HTTP `429` | Bắt buộc có rate-limiter client-side (`hrv_client.py`) & backoff khi nhận 429 |
-| **Bulk Operations** | Async Bulk GraphQL (`JSONL`) | Không có Bulk GraphQL native; dùng batch REST + queue | Giới hạn batch (`max_records`), checkpoint/resume, idempotency log |
-| **Theme Engine** | Liquid + Online Store 2.0 (JSON templates) | **Haravan Liquid** (tương đồng Shopify Liquid, `haravan_theme_twenty`) | Tái sử dụng phương pháp audit Liquid/CRO/SEO nhưng mapping đúng objects Haravan |
-| **CLI Tooling** | `@shopify/cli` (`shopify store execute`, `theme dev`) | **`@haravan/cli`** (`haravan pull`, `haravan deploy`, `haravan watch`) | Tách CLI cho theme ops, dùng Python REST client (`hrv_client.py`) cho Admin/Omni ops |
-| **Webhooks** | App webhooks + EventBridge/PubSub | Private Webhook (Admin UI) & Connect Webhook (`webhook.haravan.com/api/subscribe`) | Verify chữ ký bắt buộc qua header `X-Haravan-Hmacsha256` |
-| **MCP Ecosystem** | Official Dev MCP + community GraphQL MCPs | Community `Haravan-MCP` (TypeScript) | Dùng skill độc lập với adapter; có thể chạy qua `hrv_client.py`, CLI hoặc MCP |
+Tài liệu này hệ thống hóa nền tảng kỹ thuật của **Haravan Omni / Haraweb** (REST API, `@haravan/cli`, Haravan Liquid, Webhooks HMAC-SHA256) kết hợp kết quả khảo sát trực tiếp trên **Haravan Admin sống (`*.myharavan.com/admin`)**, từ đó kiến trúc nên bộ **88 Canonical Operational Skills** (gồm **62 skills `api-mcp`** chạy qua API/MCP/CLI cần token và **26 skills `browser-ui`** thao tác trực tiếp trên trình duyệt Admin không cần token).
 
 ---
 
-## 2. Đặc thù nghiệp vụ TMĐT Việt Nam trên Haravan (VN-Specific Capabilities)
+## 1. Kiến trúc Kỹ thuật Cốt lõi của Nền tảng Haravan
 
-So với bộ skill gốc của Shopify (tập trung thị trường US/EU với Stripe/Shopify Payments, USPS/UPS), vận hành Haravan tại Việt Nam có những bài toán đặc thù sống còn cần đưa trực tiếp vào bộ skill:
-
-1. **Đối soát COD (Cash on Delivery) & Tỷ lệ hoàn hàng (Boom hàng):**
-   - Phần lớn đơn hàng VN thanh toán COD. Cần skill riêng `finance-cod-reconciliation` đối chiếu giữa trạng thái giao hàng (`fulfillments`), trạng thái thu hộ (`financial_status`), phí ship 2 chiều và biên bản đối soát từ GHN, GHTK, Viettel Post, J&T, Ahamove.
-   - Skill `order-risk-cod-boom-signals` phát hiện tín hiệu rủi ro bom hàng (địa chỉ thiếu phường/xã, SĐT lịch sử hủy nhiều lần, đơn COD giá trị cao bất thường).
-2. **Định danh khách hàng theo Số Điện Thoại (Phone-First CRM):**
-   - Khách hàng VN thường đặt hàng qua SĐT (kể cả từ Harasocial/POS) mà không có email hoặc dùng email giả. Cần `customer-duplicate-phone-finder` chuẩn hóa đầu số `+84`/`0` để tìm trùng lặp và gộp ngữ cảnh.
-3. **Vận hành Đa kênh (Haravan Omnichannel):**
-   - Haravan kết nối đồng bộ **Haraweb + Harasocial (Facebook/Instagram/Zalo) + HaraRetail POS + Sàn TMĐT (Shopee, Lazada, TikTok Shop)**.
-   - Cần các skill chuyên biệt: `finance-sales-by-channel-omni`, `omnichannel-marketplace-sync-audit`, `inventory-multi-location-audit`.
-4. **Kho hàng & Nhập hàng nội địa:**
-   - Haravan có API chuyên biệt cho `inventory_locations`, `inventories/purchase_orders`, `v2/inventories/purchase_receives` và điều chuyển kho (`transfers`) — được phủ đầy đủ trong nhóm `30-inventory-supply`.
-5. **Chăm sóc khách hàng qua ZNS / Haraloyalty & Hóa đơn GTGT (VAT):**
-   - Kịch bản giỏ hàng bỏ quên (`marketing-cart-recovery-zns`) kết hợp Email + Zalo ZNS.
-   - Báo cáo thuế ước tính (`finance-tax-vat-summary`) hỗ trợ đối chiếu xuất hóa đơn điện tử GTGT tại VN.
+| Khía cạnh kỹ thuật | Đặc tả thực tế trên Haravan (Omni / Haraweb) | Chuẩn thiết kế trong `haravan-ops-skills` |
+| :--- | :--- | :--- |
+| **API Architecture** | **REST Omni API** (`/com/*.json`) & **Online Store Web API** (`/web/*.json`) | **REST-first**; chuẩn hóa pagination (`page`, `limit=50..250`, `since_id`), field filtering (`fields=...`) |
+| **Base Endpoints** | `https://apis.haravan.com/com/` & `https://apis.haravan.com/web/` | Tách rõ 2 surface `com` (Admin/Omni) và `web` (Theme/Pages/Blogs/Redirects/ScriptTags) |
+| **Authentication** | **Private App Bearer Token** hoặc **OAuth2 (`offline_access`)** | Header `Authorization: Bearer <TOKEN>`, đọc tuyệt đối từ ENV, hỗ trợ refresh token cho App |
+| **Access Scopes** | Namespace phân tách rõ: `com.read_*`, `com.write_*`, `web.read_*`, `web.write_*`, `wh_api` | Nguyên tắc **Least-Privilege Scopes**: tầng L1 Read-Only tuyệt đối không yêu cầu scope ghi |
+| **Rate Limiting** | **Leaky Bucket: 80 requests, leak rate 4 req/s**, HTTP `429 Too Many Requests` | Tích hợp sẵn client-side limiter (`scripts/hrv_client.py`, ngưỡng an toàn ≤ 2.5 req/s) + exponential backoff |
+| **Batch & Bulk Ops** | Xử lý theo lô REST có kiểm soát tốc độ | Giới hạn batch cứng (`max_records <= 25` cho L3, `<= 100` cho L2), idempotency key & backup JSON |
+| **Theme Engine** | **Haravan Liquid** (`haravan_theme_twenty` & custom themes) | Audit chuyên sâu hiệu năng Liquid, vòng lặp N+1, lazy-load LCP, SEO/CRO trên Staging Theme |
+| **CLI Tooling** | **`@haravan/cli`** (`haravan pull`, `haravan deploy`, `haravan watch`) | Tách CLI cho theme ops trên Staging Theme; cấm sửa trực tiếp Live Theme (`role: main`) |
+| **Webhooks** | Private Webhook (Admin UI) & Connect Webhook (`webhook.haravan.com/api/subscribe`) | Bắt buộc xác thực chữ ký `X-Haravan-Hmacsha256` (HMAC-SHA256 Base64) |
+| **Haravan Admin UI** | Giao diện quản trị `*.myharavan.com/admin` với 17 mục Cấu hình + Cross-origin iframe `web.haravan.app` | Bộ **26 Browser UI Skills** bám sát từng route/nút bấm thực tế, áp dụng **Screenshot-Before-Save** |
 
 ---
 
-## 3. Ánh xạ & Dedupe từ Corpus Shopify (500+ Raw Entries → 88 Canonical Haravan Skills)
+## 2. Tinh hoa Nghiệp vụ Bán lẻ & TMĐT Việt Nam trên Haravan
 
-Áp dụng nguyên tắc dedupe từ nghiên cứu gốc:
-- **Gộp trùng lặp:** Các skill trùng chức năng giữa StoreHand, 40RTY, Daino, Dragonfruit, Selofy, Pikka được gộp thành 1 canonical skill duy nhất.
-- **Tách transaction nguy hiểm:** Tách hẳn `read` / `audit` khỏi `proposal` và `critical write` (ví dụ: tách `order-lookup-summary` khỏi `order-cancel-restock-critical`; tách `inventory-multi-location-audit` khỏi `inventory-adjustment-proposal`).
-- **Sửa lỗi an toàn từ community repos:**
-  - Sửa lỗi `dry_run: false` mặc định của 40RTY → **100% đặt `dry_run: true` mặc định**.
-  - Gắn `separate_turn: true` cho mọi L3 critical mutation.
-  - Gắn disclaimer **Operational Estimate** cho toàn bộ nhóm Finance (60-finance-analytics).
-  - Loại bỏ thao tác tự động sửa `robots.txt.liquid` live theme không qua kiểm duyệt.
+Bộ skill được đúc kết từ thực tiễn vận hành bán lẻ đa kênh tại Việt Nam, giải quyết trực diện các bài toán sống còn của chủ doanh nghiệp & đội ngũ vận hành:
+
+1. **Đối soát COD (Cash on Delivery) & Kiểm soát Bom hàng:**
+   - Phần lớn đơn hàng TMĐT Việt Nam thanh toán COD. Bộ skill tách rõ cơ chế đồng bộ COD tự động của **GHN / GHTK** với quy trình đối soát thủ công của **Viettel Post**, đồng thời cung cấp `finance-cod-reconciliation` đối chiếu 4 trạng thái và `order-risk-cod-boom-signals` chấm điểm 6 tín hiệu rủi ro bom hàng trước khi kho đóng gói.
+2. **CRM Định danh theo Số Điện Thoại (Phone-First CRM):**
+   - Khách hàng Việt Nam mua đa kênh (Haraweb, Harasocial, HaraRetail POS) thường định danh bằng SĐT thay vì email. `customer-duplicate-phone-finder` chuẩn hóa đầu số `+84`/`84`/`0` và đầu số cũ, kết hợp phân khúc RFM, Cohort Retention và Watchlist VIP rời bỏ.
+3. **Vận hành Đa kênh Đồng bộ (Haravan Omnichannel):**
+   - Bao phủ toàn bộ trục **Haraweb + Harasocial (Facebook/Instagram/Zalo) + HaraRetail POS + Sàn TMĐT (Shopee, Lazada, TikTok Shop)** thông qua `finance-sales-by-channel-omni`, `omnichannel-marketplace-sync-audit`, và `inventory-multi-location-audit`.
+4. **Quản trị Kho hàng Nâng cao & Thu mua Nội địa:**
+   - Khai thác sâu hệ thống kho đa chi nhánh (`inventory_locations`, `purchase_orders`, `v2/inventories/purchase_receives`, `transfers`), kiểm kho cuốn chiếu ABC (`inventory-stocktake-cycle-count`), dự báo Reorder Point và xử lý hàng tồn chậm chôn vốn (`inventory-aging-dead-stock`).
+5. **Chăm sóc Khách hàng ZNS / Haraloyalty & Tuân thủ Thuế GTGT / HĐĐT:**
+   - Kịch bản giỏ hàng bỏ quên 3 chạm (1h/24h/72h) qua Email & Zalo ZNS, cấu hình OTP Zalo trên Checkout, tổng hợp ước tính thuế GTGT (8%/10% theo NĐ 123/2020/NĐ-CP) và rà soát eTax/Hóa đơn điện tử trên Admin UI.
+
+---
+
+## 3. Nguyên tắc Chuẩn hóa & Kiểm soát An toàn Sản xuất (Production Safety)
+
+- **Tách rành mạch 2 kênh thực thi:** `skills/api-mcp/` (62 skills cần `HARAVAN_ACCESS_TOKEN`) và `skills/browser-ui/` (26 skills thao tác trực tiếp trên trình duyệt Haravan Admin không cần token).
+- **Tách riêng giao dịch nguy hiểm:** Không gộp Read/Audit với Mutation; tách riêng hủy đơn, hoàn tiền, tạo vận đơn hàng loạt, chỉnh giá và cấu hình dòng tiền thành các skill độc lập có rào chắn nghiêm ngặt.
+- **Mặc định an toàn tuyệt đối:**
+  - `100%` skill L2/L3 mặc định `dry_run: true` (hoặc **Screenshot-Before-Save** trên trình duyệt).
+  - Bắt buộc `separate_turn: true` (xác nhận ở lượt hội thoại riêng) cho mọi skill `L3` Critical.
+  - Bắt buộc ẩn dữ liệu cá nhân (`redact_output: true`, `export_allowed: false`) cho mọi skill có PII khách hàng/tài chính.
+  - Gắn **Financial Disclaimer** (Operational Estimate / Reconciliation Aid) cho toàn bộ nhóm Tài chính & Thuế.
 
 ---
 

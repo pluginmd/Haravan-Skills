@@ -162,7 +162,7 @@ IF target_theme.role == "main":
 **Tình huống biên (Edge Cases) đặc thù Haravan:**
 1. **Ghi đè mất dữ liệu `config/settings_data.json`:** Team Marketing thường sửa ảnh banner/popup trên Haravan Admin trực tiếp trên Live Theme. Nếu dev `pull` từ 3 ngày trước rồi `deploy` đè `settings_data.json`, toàn bộ banner mới sẽ biến mất. Luôn exclude file này hoặc `pull` mới nhất trước khi merge.
 2. **Iframe cross-origin trong Haravan Admin (`web.haravan.app`):** Các màn hình Website trong Admin UI chạy trong iframe khác domain, khiến browser automation khó thao tác sửa code Liquid; luôn dùng `@haravan/cli` và Web API thay thế.
-3. **Khác biệt Liquid của Haravan so với Shopify:** Haravan hỗ trợ cú pháp Liquid cổ điển, một số filter/object mới của Shopify OS 2.0 (`sections/*.json`, `image_tag`, `render` với tham số phức tạp) không tương thích hoàn toàn — luôn kiểm thử trên Staging Theme thực tế của Haravan.
+3. **Đặc thù cú pháp Haravan Liquid:** Haravan sử dụng hệ thống template Liquid chuẩn riêng (tham chiếu theme gốc `haravan_theme_twenty`); một số cú pháp template JSON mở rộng hoặc filter không nằm trong tài liệu chính thức `docs.haravan.com` có thể không được hỗ trợ — luôn kiểm thử hiển thị thực tế trên Staging Theme trước khi xuất bản.
 
 ## 8. Liên kết Workflow & Skill kế tiếp
 

@@ -1,5 +1,6 @@
 {
   "schema_version": "1.1.0",
+  "author": "Nguyễn Ngọc Tuấn, Founder Transform Group",
   "platform": "haravan.com",
   "track": "api_mcp",
   "total_skills": 62,
