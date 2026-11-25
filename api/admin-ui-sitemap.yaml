@@ -197,5 +197,11 @@ live_dom_verified_controls:
     heading: "Quản lý kênh bán cho đơn hàng"
     buttons: ["Thêm kênh bán hàng"]
     columns: ["Tên kênh bán", "Mã kênh bán", "Trạng thái", "Loại"]
+  "/admin/settings/payments":
+    sections: ["Haravan QR", "Cổng thanh toán", "Thanh toán thủ công"]
+    buttons: ["Thêm tài khoản", "Thêm", "Thao tác"]
+    manual_payment_dropdown: ["Chỉnh sửa", "Xóa"]
+    manual_payment_inline_form_fields: ["Đặt tên phương thức", "Mô tả"]
+    manual_payment_inline_form_buttons: ["Hủy", "Lưu"]
   "/admin/apps":
     buttons: ["Ứng dụng riêng", "Đến Kho ứng dụng Haravan", "Xem thêm"]

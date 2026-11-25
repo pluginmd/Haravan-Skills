@@ -50,7 +50,7 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
-> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/payments` — 3 sections: `Haravan QR` (`Thêm tài khoản`), `Cổng thanh toán` (`Thêm`), `Thanh toán thủ công` (`Thêm`, `Thao tác` trên `Thanh toán khi giao hàng (COD)` & `Chuyển khoản qua ngân hàng`).
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified + Live Dry-Run Tested):** `/admin/settings/payments` — 3 sections: `Haravan QR` (`Thêm tài khoản`), `Cổng thanh toán` (`Thêm`), `Thanh toán thủ công` (`Thêm`, `Thao tác` → dropdown `Chỉnh sửa` / `Xóa` [CẤM] trên `Thanh toán khi giao hàng (COD)` & `Chuyển khoản qua ngân hàng`). Khi click `Chỉnh sửa`, mở **inline form ngay trong card** gồm 2 trường: `Đặt tên phương thức` (placeholder `Đặt tên phương thức`), `Mô tả` (placeholder `Nhập mô tả`) và 2 nút `Hủy`, `Lưu`.
 
 
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
