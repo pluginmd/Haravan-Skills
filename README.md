@@ -74,6 +74,7 @@ haravan-ops-skills/
 ├── README.md                              # Tài liệu tổng quan, hướng dẫn & danh mục đầy đủ 88 skills
 ├── AGENTS.md                              # Quy tắc an toàn bắt buộc cho AI Agent vận hành Haravan
 ├── RESEARCH.md                            # Kiến trúc kỹ thuật & Tinh hoa vận hành Haravan Omnichannel
+├── QC-REPORT.md                           # Báo cáo kiểm định 10 cổng QC & 15 bài test tự động (auto-generated)
 ├── registry.json                          # Chỉ mục tổng hợp 88 skills (auto-generated)
 ├── registry-api-mcp.json                  # Chỉ mục 62 skills chạy qua API / MCP / CLI (Cần Token)
 ├── registry-browser-ui.json               # Chỉ mục 26 skills thao tác trình duyệt Admin UI (Không cần Token)
@@ -98,6 +99,7 @@ haravan-ops-skills/
 │   ├── hrv_ops.py                         # CLI vận hành 11 tác vụ lõi (hỗ trợ cả --demo offline & live token)
 │   ├── generate_registry.py               # Tự động sinh đồng bộ 3 file registry JSON từ skills/
 │   ├── validate_registry.py               # Kiểm tra toàn bộ contract, scopes, channel & safety defaults
+│   ├── qc_audit.py                        # Master QC Runner (10 cổng kiểm định tự động + xuất QC-REPORT.md)
 │   └── dry_run_report.py                  # Xuất file *.backup.json & *.preview.csv trước khi ghi
 ├── mcp/
 │   ├── haravan_mcp_server.py              # MCP Server (JSON-RPC 2.0 stdio, zero external dependencies)
@@ -110,7 +112,7 @@ haravan-ops-skills/
 │   ├── schedules.yaml                     # 16 lịch vận hành định kỳ (6 Daily, 7 Weekly, 3 Monthly)
 │   └── n8n/haravan-order-webhook.json     # Workflow n8n mẫu: nhận orders/create -> verify HMAC -> chấm điểm COD
 ├── tests/
-│   └── test_skills_suite.py               # Bộ 9 test tự động (Client, PII, HMAC, 88 skills, CLI, MCP)
+│   └── test_skills_suite.py               # Bộ 15 test tự động (Client, PII, HMAC, 88 skills, Live-DOM, CLI, MCP)
 └── skills/
     ├── api-mcp/                           # 62 Skills — Chạy qua API / MCP / CLI (requires_token: true)
     └── browser-ui/                        # 26 Skills — Thao tác trình duyệt Admin UI (requires_token: false)
@@ -375,7 +377,8 @@ haravan-ops-skills/
 
 - **16 Scheduled Routines** (6 Daily, 7 Weekly, 3 Monthly — chỉ chạy ở chế độ Read-Only/Dry-Run): xem [workflows/schedules.yaml](workflows/schedules.yaml).
 - **n8n Webhook Automation mẫu** (`orders/create` + Verify `X-Haravan-Hmacsha256` + Cảnh báo rủi ro COD): xem [workflows/n8n/haravan-order-webhook.json](workflows/n8n/haravan-order-webhook.json).
+- **Báo cáo kiểm định chất lượng mới nhất:** xem [QC-REPORT.md](QC-REPORT.md) (10/10 QC Gates PASSED, 15/15 unit & E2E tests OK).
 - **Lệnh kiểm chứng toàn bộ repo sau mỗi lần chỉnh sửa:**
   ```bash
-  python3 scripts/generate_registry.py && python3 scripts/validate_registry.py && python3 -m unittest discover -s tests -v
+  python3 scripts/generate_registry.py && python3 scripts/qc_audit.py
   ```
