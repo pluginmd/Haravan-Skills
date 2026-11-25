@@ -8,7 +8,7 @@
 Bộ **88 Canonical AI Agent Skills chuẩn hóa toàn diện** được chia tách rành mạch thành **2 kênh thực thi độc lập**:
 
 1. **Loại 1 — `skills/api-mcp/` (62 skills, `requires_token: true`):** Chạy qua **Haravan REST API (`/com/`, `/web/`), CLI Runner (`scripts/hrv_ops.py`), MCP Server (`mcp/haravan_mcp_server.py`) hoặc `@haravan/cli`** — yêu cầu `HARAVAN_ACCESS_TOKEN`.
-2. **Loại 2 — `skills/browser-ui/` (26 skills, `requires_token: false`):** Thao tác trực tiếp trên **trình duyệt Haravan Admin (`*.myharavan.com/admin`)** — không cần API token, chỉ cần người dùng đăng nhập trình duyệt; toàn bộ đường dẫn URL, 17 mục Cấu hình và nút bấm đã được **khảo sát xác minh trực tiếp trên Haravan Admin thật** với 4–5 kịch bản thao tác chuột chi tiết mỗi skill.
+2. **Loại 2 — `skills/browser-ui/` — Agentic Browsing Skills (26 skills, `requires_token: false`):** Thiết kế chuyên biệt cho **Agentic Browsing** — giúp các **trình duyệt AI nội bộ & extension tự động thao tác chuột/bàn phím** (như **Antigravity Internal Browser**, **ChatGPT Internal Browser / Operator**, **Claude in Chrome Extension / Computer Use**, hoặc các AI Browser Agent khác) trực tiếp điều khiển **Haravan Admin (`*.myharavan.com/admin`)** mà **không cần API token**, chỉ cần người dùng tự đăng nhập trình duyệt. Toàn bộ đường dẫn URL, 17 mục Cấu hình và nhãn nút bấm tiếng Việt đã được **khảo sát xác minh trực tiếp trên Haravan Admin thật** với 4–5 kịch bản click-by-click chi tiết mỗi skill.
 
 ### Vì sao bộ kỹ năng này tạo ra khác biệt khi vận hành Haravan?
 - **100% Thuần Haravan & Thực chiến Việt Nam:** Thiết kế chuẩn xác cho Haravan Omni REST API (`/com/`), Online Store Web API (`/web/`), Haravan Liquid, `@haravan/cli`, Webhooks HMAC-SHA256 và toàn bộ hệ sinh thái Haraweb — Harasocial — HaraRetail POS — Sàn TMĐT (Shopee, Lazada, TikTok Shop).
@@ -123,12 +123,14 @@ haravan-ops-skills/
    - Copy cấu hình từ [mcp/mcp-config.example.json](mcp/mcp-config.example.json).
    - Các MCP tools khả dụng (100% Read-Only / Safe): `haravan_list_skills` (lọc theo `execution_channel: "api_mcp" | "browser_ui"`, `domain`, `layer`), `haravan_health_check`, `haravan_catalog_audit`, `haravan_low_stock`, `haravan_cod_risk`, `haravan_morning_briefing`.
 
-### Cách B — Dùng nhóm `skills/browser-ui/` (Thao tác trình duyệt Haravan Admin, KHÔNG cần Token)
+### Cách B — Dùng nhóm `skills/browser-ui/` (Agentic Browsing trên Trình duyệt AI — KHÔNG cần Token)
 
-1. Mở trình duyệt internal (hoặc dùng `/browser`) tới `https://accounts.haravan.com`.
-2. Người dùng **tự đăng nhập** vào Haravan Admin (`*.myharavan.com/admin`) — Agent không bao giờ hỏi hay nhập mật khẩu/OTP.
-3. Chọn skill trong `skills/browser-ui/` (xem bảng đầy đủ bên dưới) và đối chiếu bản đồ URL thực tế tại [api/admin-ui-sitemap.yaml](api/admin-ui-sitemap.yaml).
-4. Agent luôn áp dụng **Screenshot-Before-Save** (chụp trạng thái trước + điền form chưa bấm `Lưu` → chờ xác nhận → bấm `Lưu` → reload xác minh).
+> **Tương thích trực tiếp với:** **Antigravity Internal Browser (`/browser`)**, **ChatGPT Internal Browser / Operator**, **Claude in Chrome Extension / Computer Use**, và mọi **AI Browser Agent** hỗ trợ điều khiển chuột/form.
+
+1. Mở trình duyệt AI của bạn tới `https://accounts.haravan.com`.
+2. Người dùng **tự đăng nhập** vào Haravan Admin (`*.myharavan.com/admin`) — Agent tuyệt đối không hỏi hay tự nhập mật khẩu/OTP.
+3. Nạp skill tương ứng trong `skills/browser-ui/` (kèm [policies/browser-ui-safety.md](policies/browser-ui-safety.md) và [api/admin-ui-sitemap.yaml](api/admin-ui-sitemap.yaml)) để AI Agent nhảy thẳng tới đúng route `/admin/...` và click đúng nhãn nút tiếng Việt.
+4. Agent bắt buộc áp dụng **Screenshot-Before-Save** (chụp trạng thái trước + điền form chưa bấm `Lưu` → chờ xác nhận → bấm `Lưu` → reload xác minh) và tuân thủ danh sách nút **Hard-Blocked** cấm tự bấm.
    > **Lưu ý kỹ thuật đã kiểm chứng:** 5 màn hình con dưới **Kênh bán hàng > Website** (`/admin/sale_channels/online_store/{themes,articles,pages,menus,settings}`) chạy trong cross-origin iframe `https://web.haravan.app`. Với Theme/Pages/Blogs/Redirects, hãy dùng các skill `api-mcp` (`/web/*` và `@haravan/cli`).
 
 ---

@@ -1,6 +1,6 @@
-# Policy: Haravan Admin Browser UI Automation Safety
+# Policy: Haravan Admin Agentic Browsing Safety (`skills/browser-ui/`)
 
-Tài liệu này quy định luật bắt buộc khi AI Agent thao tác trực tiếp bằng trình duyệt (con trỏ chuột, nhập form, click nút) trên giao diện quản trị **Haravan Admin (`*.myharavan.com/admin`)**.
+Tài liệu này quy định luật bắt buộc cho mọi **AI Browser Agent (Agentic Browsing)** — bao gồm **Antigravity Internal Browser**, **ChatGPT Internal Browser / Operator**, **Claude in Chrome Extension / Computer Use**, và các trình duyệt AI tự động — khi điều khiển con trỏ chuột, điền form và click nút trực tiếp trên giao diện quản trị **Haravan Admin (`*.myharavan.com/admin`)**.
 
 ---
 

@@ -20,7 +20,7 @@ Tài liệu này hệ thống hóa nền tảng kỹ thuật của **Haravan Omn
 | **Theme Engine** | **Haravan Liquid** (`haravan_theme_twenty` & custom themes) | Audit chuyên sâu hiệu năng Liquid, vòng lặp N+1, lazy-load LCP, SEO/CRO trên Staging Theme |
 | **CLI Tooling** | **`@haravan/cli`** (`haravan pull`, `haravan deploy`, `haravan watch`) | Tách CLI cho theme ops trên Staging Theme; cấm sửa trực tiếp Live Theme (`role: main`) |
 | **Webhooks** | Private Webhook (Admin UI) & Connect Webhook (`webhook.haravan.com/api/subscribe`) | Bắt buộc xác thực chữ ký `X-Haravan-Hmacsha256` (HMAC-SHA256 Base64) |
-| **Haravan Admin UI** | Giao diện quản trị `*.myharavan.com/admin` với 17 mục Cấu hình + Cross-origin iframe `web.haravan.app` | Bộ **26 Browser UI Skills** bám sát từng route/nút bấm thực tế, áp dụng **Screenshot-Before-Save** |
+| **Haravan Admin UI (Agentic Browsing)** | Giao diện quản trị `*.myharavan.com/admin` với 17 mục Cấu hình + Cross-origin iframe `web.haravan.app` | Bộ **26 Agentic Browsing Skills** (`skills/browser-ui/`) dành cho Antigravity Internal Browser, ChatGPT Internal Browser/Operator, Claude in Chrome Extension — bám sát từng route/nút bấm thực tế với **Screenshot-Before-Save** |
 
 ---
 
