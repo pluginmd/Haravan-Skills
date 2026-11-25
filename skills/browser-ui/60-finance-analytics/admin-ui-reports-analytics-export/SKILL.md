@@ -49,6 +49,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Section/Tab, Nhãn nút bấm, Cột bảng & Bộ lọc)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Cross-Origin Iframe (Live-Verified):** `/admin/reports/dashboard` & `/admin/reports/listing` nhúng `https://reports.haravan.app`. Nếu sandbox browser ẩn iframe, tự động chuyển sang bộ báo cáo `skills/api-mcp/60-finance-analytics/` & `90-control-tower-governance/` (`hrv_ops.py`).
+
+
 | Màn hình / Nhóm Báo cáo | Route / Vị trí chính xác | Nhãn hiển thị thực tế (Exact UI Labels) | Bộ lọc & Chỉ số chính |
 | :--- | :--- | :--- | :--- |
 | Bảng phân tích tổng quan | `/admin/reports/dashboard` | Bộ chọn `Thời gian` (`Hôm nay`, `7 ngày qua`, `30 ngày qua`, `Tùy chọn`), `So sánh kỳ trước`, bộ lọc `Kênh bán hàng`, `Chi nhánh` | Thẻ KPI: `Doanh thu thuần`, `Tổng đơn hàng`, `Giá trị đơn trung bình (AOV)`, `Tỷ lệ khách quay lại`, biểu đồ `Doanh thu theo kênh` |

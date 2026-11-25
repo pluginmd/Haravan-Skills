@@ -55,6 +55,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/draft_orders` — Empty State CTA: `Tạo đơn` (link `Trợ giúp về Đơn hàng nháp`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/draft_orders` | Danh sách Đơn hàng nháp | `Tạo đơn hàng`, `Lọc`, `Tìm kiếm`, `Xuất dữ liệu` (CẤM tự bấm) | Bộ lọc: `Trạng thái` (`Đang mở` / `Đã gửi hóa đơn` / `Đã hoàn tất`), `Ngày tạo`, `Nhân viên tạo`, `Nhãn (Tag)`. Cột: Mã đơn nháp (`#D...`), Ngày tạo, Khách hàng, Trạng thái, Tổng tiền |

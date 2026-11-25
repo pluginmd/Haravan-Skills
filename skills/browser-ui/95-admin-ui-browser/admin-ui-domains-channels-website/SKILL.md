@@ -53,6 +53,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/domains` — Nút `Kết nối tên miền hiện có`, `Thay đổi tên miền chính` (L3 CẤM tự bấm); Bảng cột `Tên miền chính`, `Trạng thái`. 5 màn hình Website chạy cross-origin iframe `https://web.haravan.app`.
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/domains` | `Tên miền chính` & Danh sách tên miền | `Kết nối tên miền hiện có`, `Thay đổi tên miền chính` (HARD-BLOCKED nếu chưa SSL), `Xóa` (HARD-BLOCKED) | Cột: Tên miền (`*.myharavan.com`, custom domain), `Trạng thái` (`Đã kết nối` / `Đang chờ DNS` / `SSL đang hoạt động`), tùy chọn chuyển hướng toàn bộ traffic về tên miền chính |

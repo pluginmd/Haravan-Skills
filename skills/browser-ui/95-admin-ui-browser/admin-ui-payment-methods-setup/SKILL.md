@@ -50,6 +50,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/payments` — 3 sections: `Haravan QR` (`Thêm tài khoản`), `Cổng thanh toán` (`Thêm`), `Thanh toán thủ công` (`Thêm`, `Thao tác` trên `Thanh toán khi giao hàng (COD)` & `Chuyển khoản qua ngân hàng`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/payments` | 1. `Haravan QR` | `Thêm tài khoản`, `Cấu hình`, `Ngừng kết nối` (HARD-BLOCKED) | Liên kết tài khoản ngân hàng (VCB, TCB, BIDV, MB, ACB, VPBank...) để sinh mã VietQR động kèm số tiền & mã đơn, tự động gạch nợ chuyển `Đã thanh toán` |

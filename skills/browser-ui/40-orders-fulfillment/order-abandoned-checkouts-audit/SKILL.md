@@ -50,6 +50,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/orders/checkouts` — Empty State CTA: `Tìm hiểu thêm` (link `Trợ giúp về Đơn chưa hoàn tất`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/orders/checkouts` | Thanh công cụ & Bộ lọc | `Lọc`, `Tìm kiếm`, `Xuất dữ liệu` (HARD-BLOCKED) | Bộ lọc: `Ngày tạo`, `Trạng thái gửi email` (`Đã gửi` / `Chưa gửi`), `Trạng thái khôi phục` (`Đã khôi phục` / `Chưa khôi phục`) |

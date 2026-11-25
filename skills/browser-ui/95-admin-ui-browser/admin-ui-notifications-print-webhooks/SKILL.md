@@ -53,6 +53,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/notifications` — 4 sections: `Nội dung email` (`Chỉnh sửa mẫu email` + 13 mẫu có switch), `Mẫu in` (`Đơn hàng`, `Vận đơn`, `Tồn kho`), `Thông báo đơn hàng` (`Thêm thông báo đơn hàng`), `Webhooks` (`Thêm webhook`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/notifications` | 1. `Nội dung email` | `Chỉnh sửa mẫu email`, Toggle Switch trên từng mẫu | 13 mẫu email sự kiện: `Xác nhận đơn hàng`, `Hủy đơn hàng`, `Hoàn tiền đơn hàng`, `Xác nhận giao hàng`, `Cập nhật giao hàng`, `Hoàn tất đơn hàng`, `Đơn hàng chưa hoàn tất`, `Xác nhận tài khoản khách hàng`, `Chào mừng khách hàng`, `Thay đổi mật khẩu`, `Hóa đơn đơn hàng nháp`... |

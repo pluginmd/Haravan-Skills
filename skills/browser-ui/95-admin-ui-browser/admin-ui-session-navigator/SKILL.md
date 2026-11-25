@@ -50,6 +50,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, 12 Sidebar Groups & Ma trận 17 Mục Settings)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Live-Verified Architecture:** Haravan Admin (`*.myharavan.com/admin`) gồm 17 mục `/admin/settings` chạy Native DOM + 3 phân hệ chạy Cross-Origin Iframe (`web.haravan.app`, `customers.haravan.app`, `reports.haravan.app`). Xem chi tiết đầy đủ tại `api/admin-ui-sitemap.yaml`.
+
+
 ### A. Thanh điều hướng chính (Sidebar Navigation — 12 Nhóm Đã Kiểm Chứng)
 
 | Route / URL | Nhóm Menu (Exact UI Label) | Các mục con đã kiểm chứng (Verified Children) | Ghi chú kỹ thuật & Skill liên kết |

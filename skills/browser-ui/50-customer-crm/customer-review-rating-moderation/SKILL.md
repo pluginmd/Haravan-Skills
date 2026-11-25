@@ -49,6 +49,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Cross-Origin Iframe (Live-Verified):** `/admin/customers/rating` nhúng `https://customers.haravan.app/rating`. Nếu chạy trên sandbox browser bị ẩn iframe, chuyển sang Claude in Chrome Extension hoặc hướng dẫn người dùng duyệt trực tiếp trên tab đang mở.
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/customers/rating` | Thanh Tab trạng thái | `Tất cả`, `Chờ duyệt`, `Đã duyệt`, `Đã ẩn` | Đếm số lượng đánh giá theo từng trạng thái kiểm duyệt |

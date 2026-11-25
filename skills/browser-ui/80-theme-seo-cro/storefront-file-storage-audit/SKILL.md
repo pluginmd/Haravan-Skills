@@ -49,6 +49,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/files` — H1 `Quản lý danh sách file`; Nút: `Tải file`.
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/files` | Thanh tiêu đề & Bộ lọc | `Tải file lên` (HARD-BLOCKED), `Tìm kiếm`, `Lọc` | Ô tìm kiếm theo tên tệp; bộ lọc loại tệp (`Hình ảnh`, `Tài liệu`, `Video`, `Tất cả`) |

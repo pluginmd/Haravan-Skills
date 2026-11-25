@@ -49,6 +49,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Section/Tab, Nhãn nút bấm, Cột bảng & Bộ lọc)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/apps` — Nút `Ứng dụng riêng`, link `Đến Kho ứng dụng Haravan`, `Xem thêm`. `/admin/settings/order_addon` (`Quản lý kênh bán cho đơn hàng`) — Nút `Thêm kênh bán hàng`, Ô `Tìm kiếm`, Cột: `Tên kênh bán`, `Mã kênh bán`, `Trạng thái`, `Loại`.
+
+
 | Màn hình kiểm toán | Route / Vị trí chính xác | Nhãn hiển thị thực tế (Exact UI Labels) | Thông tin cần đọc / Kiểm tra |
 | :--- | :--- | :--- | :--- |
 | Danh sách Ứng dụng | `/admin/apps` | Danh sách thẻ/bảng `Ứng dụng đã cài đặt`, nút `Kho ứng dụng`, tab/mục `Ứng dụng riêng (Private Apps)` (nếu có) | Tên ứng dụng, trạng thái hoạt động, ngày cài đặt, nhóm quyền truy cập (scopes), dấu hiệu app dư thừa |

@@ -53,6 +53,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Cross-Origin Iframe & Chiến lược Định tuyến)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Cross-Origin Iframe (Live-Verified):** Toàn bộ 5 màn hình Website (`/admin/sale_channels/online_store/{themes,articles,pages,menus,settings}`) nhúng `https://web.haravan.app`. Ưu tiên Web API (`/web/*`) và `@haravan/cli` cho Theme/Pages/Blogs/Redirects; dùng Assisted-UI cho Menu & Theme Customizer.
+
+
 | Mục con Website | Route chính xác trên Admin | Origin thực tế (Verified) | Chiến lược thực thi chuẩn | Hạng mục thao tác chính |
 | :--- | :--- | :--- | :--- | :--- |
 | `Giao diện` | `/admin/sale_channels/online_store/themes` | Cross-origin iframe `https://web.haravan.app` | **Hybrid:** `@haravan/cli` / Web API cho code Liquid; **Assisted-UI** cho `Thiết lập giao diện` (Customizer) | `Sao chép` theme làm Staging, `Thiết lập giao diện`, `Chỉnh sửa code`, `Xem trước`, (**CẤM** tự bấm `Xuất bản`) |

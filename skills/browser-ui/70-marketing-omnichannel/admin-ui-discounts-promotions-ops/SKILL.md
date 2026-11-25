@@ -52,6 +52,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Section/Tab, Nhãn nút bấm, Cột bảng & Bộ lọc)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/discounts` — H1 `Quản lý khuyến mãi`; Empty State CTA: `Gợi ý khuyến mãi`, `Tạo khuyến mãi`.
+
+
 | Thành phần UI | Route / Vị trí chính xác | Nhãn hiển thị thực tế (Exact UI Labels) | Ghi chú thao tác |
 | :--- | :--- | :--- | :--- |
 | Danh sách khuyến mãi | `/admin/discounts` | Tab lọc trạng thái: `Tất cả`, `Đang áp dụng`, `Chưa áp dụng`, `Đã hết hạn` | Ô tìm kiếm theo mã code hoặc tên chương trình |

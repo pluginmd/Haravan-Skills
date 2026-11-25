@@ -50,6 +50,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/accounting/transactions` — Tab `Tất cả`; Thẻ: `Số dư đầu kỳ`, `Tổng thu`, `Tổng chi`, `Số dư cuối kỳ`; Nút: `Xuất dữ liệu`, `Tạo phiếu thu`, `Tạo phiếu chi`; Lọc: `Tháng này`, `Nguồn tiền` (`Tổng quỹ`), `Bộ lọc`. `/admin/accounting/debts` — Thẻ: `Nợ phải thu đầu kỳ`, `Nợ phát sinh`, `Nợ đã thu`, `Nợ phải thu cuối kỳ`; Dropdown `Công nợ` (`Nhà vận chuyển`); Cột: `Tên nhà vận chuyển`, `Nợ phải thu đầu kỳ`, `Nợ phát sinh`, `Nợ đã thu`, `Nợ phải thu cuối kỳ`.
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/accounting/transactions` | Tổng quan Sổ quỹ | `Tạo phiếu thu` (HARD-BLOCKED), `Tạo phiếu chi` (HARD-BLOCKED), `Xuất file` (HARD-BLOCKED), `Lọc` | 4 thẻ chỉ số: `Quỹ đầu kỳ`, `Tổng thu`, `Tổng chi`, `Tồn quỹ cuối kỳ` |

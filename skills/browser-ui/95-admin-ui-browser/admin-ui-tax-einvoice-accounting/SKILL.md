@@ -53,6 +53,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/etax/declarations` (H1 `Kê khai thuế cho hộ kinh doanh`; Empty CTA: `Tìm hiểu thêm`, `Tạo hồ sơ kê khai`); `/admin/settings/vat_setting` (Onboarding CTA khi chưa kích hoạt: `Next`, `Kích hoạt`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình / Dữ liệu chính |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/vat_setting` | `Cấu hình thuế` & `Hóa đơn điện tử` | Toggle bật/tắt tính thuế, `Kết nối`, `Chỉnh sửa`, `Lưu`, `Ngừng kết nối` (HARD-BLOCKED) | Quy tắc `Giá sản phẩm đã bao gồm thuế`, Thuế suất GTGT mặc định (`0%`, `5%`, `8%`, `10%`), trạng thái kết nối nhà cung cấp HĐĐT (MISA meInvoice, VNPT, Viettel S-Invoice, Bkav...) |

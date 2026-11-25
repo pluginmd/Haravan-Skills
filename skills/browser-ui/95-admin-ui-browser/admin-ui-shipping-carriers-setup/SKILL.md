@@ -54,6 +54,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/shipments` — 3 sections: `Phí vận chuyển` (`Thêm`), `Nhà vận chuyển` (`Nhà vận chuyển bên thứ 3` & `Nhà vận chuyển tùy chỉnh`, nút `Thêm nhà vận chuyển`), `Kích thước kiện hàng đóng gói` (`Thêm`). Kho lấy hàng nằm tại `/admin/settings/locations/{id}` (checkbox `Địa điểm lấy hàng`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/shipments` | 1. `Phí vận chuyển` | `Thêm`, `Thêm khu vực vận chuyển`, `Thêm giá vận chuyển`, `Lưu`, `Xóa` (CẤM tự bấm) | Quốc gia (`Việt Nam`), chọn Tỉnh/Thành phố (TP.HCM, Hà Nội, Các tỉnh thành khác), `Tên phương thức vận chuyển`, Tiêu chuẩn (`Dựa trên giá sản phẩm` / `Dựa trên khối lượng sản phẩm`), Khoảng (`Từ ... Đến ...`), `Giá vận chuyển` (VND — `0` = Freeship) |

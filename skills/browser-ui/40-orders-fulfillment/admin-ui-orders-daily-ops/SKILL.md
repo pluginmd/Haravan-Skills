@@ -50,12 +50,15 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Section/Tab, Nhãn nút bấm, Cột bảng & Bộ lọc)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/orders` — Tabs: `Tất cả đơn hàng`, `Đơn hàng mới`, `Chưa giao hàng`, `Chưa thanh toán`; Nút: `Xuất dữ liệu`, `Tạo đơn hàng`; Bộ lọc: `Thêm điều kiện lọc`, `Tìm kiếm`; Cột bảng: `Mã`, `Ngày tạo`, `Khách hàng`, `Thanh toán`, `Giao hàng`, `COD`, `SL sản phẩm`, `Tổng tiền`, `Kênh`.
+
+
 | Thành phần UI | Route / Vị trí chính xác | Nhãn hiển thị thực tế (Exact UI Labels) | Ghi chú thao tác |
 | :--- | :--- | :--- | :--- |
 | Danh sách đơn hàng | `/admin/orders` | Thanh tab lọc nhanh: `Tất cả đơn hàng`, `Đơn hàng mới`, `Chưa giao hàng`, `Chưa thanh toán` | Hỗ trợ lưu bộ lọc tùy chỉnh (`Lưu bộ lọc`) |
 | Nút hành động chính | Góc trên bên phải `/admin/orders` | `Tạo đơn hàng`, `Xuất dữ liệu` (PII — bị chặn mặc định), `Thao tác` (khi tick checkbox) | Nút `Thao tác` mở menu: `Gắn tag`, `Bỏ tag`, `In đơn hàng`, `Xác nhận đơn hàng` |
 | Thanh Bộ lọc đa điều kiện | Ngay trên bảng `/admin/orders` | Nút `Thêm điều kiện lọc` + Ô `Tìm kiếm` (mã đơn `#1001`, SĐT, tên, email) | Bộ lọc: `Trạng thái thanh toán`, `Trạng thái giao hàng`, `Kênh bán hàng`, `Kho bán hàng`, `Phương thức thanh toán`, `Tag`, `Ngày tạo` |
-| Cột bảng đơn hàng | Bảng chính `/admin/orders` | `Mã đơn hàng`, `Ngày tạo`, `Khách hàng`, `Thanh toán`, `Giao hàng`, `COD`, `Tổng tiền`, `Kênh` | Click vào mã `#10xxx` để mở `/admin/orders/{order_id}` |
+| Cột bảng đơn hàng | Bảng chính `/admin/orders` | `Mã`, `Ngày tạo`, `Khách hàng`, `Thanh toán`, `Giao hàng`, `COD`, `SL sản phẩm`, `Tổng tiền`, `Kênh` | Click vào mã `#10xxx` để mở `/admin/orders/{order_id}` *(Live-DOM Verified)* |
 | Chi tiết đơn — Khối Sản phẩm & Giao hàng | `/admin/orders/{order_id}` (Cột trái) | `Xác nhận đơn hàng`, `Giao hàng`, `Tách giao hàng` / chọn số lượng từng dòng SP, `In đơn hàng` | Chỉ cho sửa địa chỉ hoặc tách giao khi trạng thái là `Chưa giao hàng` / `Giao một phần` |
 | Chi tiết đơn — Khối Thanh toán | `/admin/orders/{order_id}` (Cột trái dưới) | `Xác nhận thanh toán`, `Ghi nhận thanh toán` (chọn phương thức: `Chuyển khoản`, `Tiền mặt`, `COD`) | Cần đối chiếu mã giao dịch ngân hàng trước khi xác nhận |
 | Chi tiết đơn — Khối Khách hàng & Tag | `/admin/orders/{order_id}` (Cột phải) | `Thông tin giao hàng` (icon bút chì `Sửa`), `Ghi chú đơn hàng`, `Nhãn (Tags)` | Sửa địa chỉ gồm: `Tỉnh/Thành`, `Quận/Huyện`, `Phường/Xã`, `Địa chỉ chi tiết`, `Số điện thoại` |

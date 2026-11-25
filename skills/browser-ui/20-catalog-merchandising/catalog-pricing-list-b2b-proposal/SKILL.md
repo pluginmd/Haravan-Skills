@@ -50,6 +50,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/products/pricing_list` — Empty State CTA: `Tạo bảng giá` (link `Trợ giúp về Bảng giá`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/products/pricing_list` | Danh sách Bảng giá | `Tạo bảng giá`, `Lọc`, `Tìm kiếm` | Bộ lọc: `Trạng thái` (`Đang áp dụng` / `Chưa áp dụng` / `Hết hạn`), `Kênh bán hàng`, `Chi nhánh`. Cột: Tên bảng giá, Mã bảng giá, Phạm vi áp dụng, Thời gian hiệu lực, Trạng thái |

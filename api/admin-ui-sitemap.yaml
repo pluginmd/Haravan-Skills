@@ -1,10 +1,15 @@
-# Haravan Admin Live UI Sitemap (Verified on Live Haravan Admin)
+# Haravan Admin Live UI Sitemap (100% Live-DOM Verified on Haravan Admin)
 # Base URL: https://{store_domain} (e.g. https://myshop.myharavan.com)
+# Author: Nguyễn Ngọc Tuấn, Founder Transform Group
 
 verified_environment:
   login_url: "https://accounts.haravan.com"
   admin_home: "/admin/dashboard/generals"
   quick_search_shortcut: "Ctrl+K"
+  cross_origin_microfrontends:
+    - { module: "Website", admin_prefix: "/admin/sale_channels/online_store/*", iframe_origin: "https://web.haravan.app" }
+    - { module: "Khách hàng / CRM", admin_prefix: "/admin/customers*", iframe_origin: "https://customers.haravan.app" }
+    - { module: "Báo cáo", admin_prefix: "/admin/reports/*", iframe_origin: "https://reports.haravan.app" }
 
 sidebar_navigation:
   overview:
@@ -15,66 +20,69 @@ sidebar_navigation:
     label: "Đơn hàng"
     path: "/admin/orders"
     children:
-      - { label: "Tất cả đơn hàng", path: "/admin/orders" }
-      - { label: "Đơn hàng nháp", path: "/admin/draft_orders" }
-      - { label: "Chưa hoàn tất", path: "/admin/orders/checkouts" }
-      - { label: "Giao hàng hàng loạt", path: "/admin/orders/mass_fulfill" }
+      - { label: "Tất cả đơn hàng", path: "/admin/orders", render_mode: "native" }
+      - { label: "Đơn hàng nháp", path: "/admin/draft_orders", render_mode: "native" }
+      - { label: "Chưa hoàn tất", path: "/admin/orders/checkouts", render_mode: "native" }
+      - { label: "Giao hàng hàng loạt", path: "/admin/orders/mass_fulfill", render_mode: "native" }
 
   shipments:
     label: "Vận chuyển"
     path: "/admin/shipments/dashboard"
     children:
-      - { label: "Tổng quan", path: "/admin/shipments/dashboard" }
-      - { label: "Vận chuyển", path: "/admin/shipments" }
-      - { label: "Quản lý thu hộ", path: "/admin/shipments/managecod" }
-      - { label: "Đóng gói", path: "/admin/shipments/packed" }
-      - { label: "Biên bản bàn giao", path: "/admin/shipments/shipment_handovers" }
-      - { label: "Biên bản hoàn hàng", path: "/admin/shipments/shipment_returns" }
+      - { label: "Tổng quan", path: "/admin/shipments/dashboard", render_mode: "native" }
+      - { label: "Vận chuyển", path: "/admin/shipments", render_mode: "native" }
+      - { label: "Quản lý thu hộ", path: "/admin/shipments/managecod", render_mode: "native" }
+      - { label: "Đóng gói", path: "/admin/shipments/packed", render_mode: "native" }
+      - { label: "Biên bản bàn giao", path: "/admin/shipments/shipment_handovers", render_mode: "native" }
+      - { label: "Biên bản hoàn hàng", path: "/admin/shipments/shipment_returns", render_mode: "native" }
 
   products:
     label: "Sản phẩm"
     path: "/admin/products"
     children:
-      - { label: "Tất cả sản phẩm", path: "/admin/products" }
-      - { label: "Nhóm sản phẩm", path: "/admin/products/collections" }
-      - { label: "Bảng giá", path: "/admin/products/pricing_list" }
-      - { label: "Tồn kho", path: "/admin/products/inventories" }
+      - { label: "Tất cả sản phẩm", path: "/admin/products", render_mode: "native" }
+      - { label: "Nhóm sản phẩm", path: "/admin/products/collections", render_mode: "native" }
+      - { label: "Bảng giá", path: "/admin/products/pricing_list", render_mode: "native" }
+      - { label: "Tồn kho", path: "/admin/products/inventories", render_mode: "native" }
 
   customers:
     label: "Khách hàng"
     path: "/admin/customers"
+    iframe_origin: "https://customers.haravan.app"
     children:
-      - { label: "Tất cả khách hàng", path: "/admin/customers" }
-      - { label: "Nhóm khách hàng", path: "/admin/customers/segments" }
-      - { label: "Chiến dịch Broadcast", path: "/admin/customers/broadcast_campaigns" }
-      - { label: "Kịch bản tự động", path: "/admin/customers/flows" }
-      - { label: "Quản lý đánh giá", path: "/admin/customers/rating" }
-      - { label: "Cấu hình thành viên", path: "/admin/customers/settings" }
+      - { label: "Tất cả khách hàng", path: "/admin/customers", render_mode: "cross_origin_iframe" }
+      - { label: "Nhóm khách hàng", path: "/admin/customers/segments", render_mode: "cross_origin_iframe" }
+      - { label: "Chiến dịch Broadcast", path: "/admin/customers/broadcast_campaigns", render_mode: "cross_origin_iframe" }
+      - { label: "Kịch bản tự động", path: "/admin/customers/flows", render_mode: "cross_origin_iframe" }
+      - { label: "Quản lý đánh giá", path: "/admin/customers/rating", render_mode: "cross_origin_iframe" }
+      - { label: "Cấu hình thành viên", path: "/admin/customers/settings", render_mode: "cross_origin_iframe" }
 
   accounting:
     label: "Sổ quỹ"
     path: "/admin/accounting/transactions"
     children:
-      - { label: "Sổ quỹ", path: "/admin/accounting/transactions" }
-      - { label: "Công nợ", path: "/admin/accounting/debts" }
+      - { label: "Sổ quỹ", path: "/admin/accounting/transactions", render_mode: "native" }
+      - { label: "Công nợ", path: "/admin/accounting/debts", render_mode: "native" }
 
   discounts:
     label: "Khuyến mãi"
     path: "/admin/discounts"
+    render_mode: "native"
 
   reports:
     label: "Báo cáo"
     path: "/admin/reports/dashboard"
+    iframe_origin: "https://reports.haravan.app"
     children:
-      - { label: "Bảng phân tích", path: "/admin/reports/dashboard" }
-      - { label: "Danh sách báo cáo", path: "/admin/reports/listing" }
+      - { label: "Bảng phân tích", path: "/admin/reports/dashboard", render_mode: "cross_origin_iframe" }
+      - { label: "Danh sách báo cáo", path: "/admin/reports/listing", render_mode: "cross_origin_iframe" }
 
   etax:
     label: "Thuế & kế toán"
     path: "/admin/etax/declarations"
     children:
-      - { label: "Tờ khai thuế", path: "/admin/etax/declarations" }
-      - { label: "Sổ kế toán", path: "/admin/etax/revenue_ledgers" }
+      - { label: "Tờ khai thuế", path: "/admin/etax/declarations", render_mode: "native" }
+      - { label: "Sổ kế toán", path: "/admin/etax/revenue_ledgers", render_mode: "native" }
 
   marketing:
     label: "Marketing"
@@ -88,11 +96,11 @@ sidebar_navigation:
     path: "/admin/settings/sale_channels"
     website_iframe_origin: "https://web.haravan.app"
     website_children:
-      - { label: "Giao diện", path: "/admin/sale_channels/online_store/themes", cross_origin_iframe: true }
-      - { label: "Blogs", path: "/admin/sale_channels/online_store/articles", cross_origin_iframe: true }
-      - { label: "Trang nội dung", path: "/admin/sale_channels/online_store/pages", cross_origin_iframe: true }
-      - { label: "Menu", path: "/admin/sale_channels/online_store/menus", cross_origin_iframe: true }
-      - { label: "Cấu hình Website", path: "/admin/sale_channels/online_store/settings", cross_origin_iframe: true }
+      - { label: "Giao diện", path: "/admin/sale_channels/online_store/themes", render_mode: "cross_origin_iframe" }
+      - { label: "Blogs", path: "/admin/sale_channels/online_store/articles", render_mode: "cross_origin_iframe" }
+      - { label: "Trang nội dung", path: "/admin/sale_channels/online_store/pages", render_mode: "cross_origin_iframe" }
+      - { label: "Menu", path: "/admin/sale_channels/online_store/menus", render_mode: "cross_origin_iframe" }
+      - { label: "Cấu hình Website", path: "/admin/sale_channels/online_store/settings", render_mode: "cross_origin_iframe" }
     external_apps:
       - { label: "Haravan POS", url: "https://pos.haravan.app" }
       - { label: "Harasocial", url: "https://app.harasocial.com" }
@@ -100,6 +108,7 @@ sidebar_navigation:
   apps:
     label: "Ứng dụng"
     path: "/admin/apps"
+    render_mode: "native"
 
 settings_hub:
   path: "/admin/settings"
@@ -122,3 +131,71 @@ settings_hub:
     - { key: "domains", label: "Tên miền", path: "/admin/settings/domains" }
     - { key: "order_addon", label: "Tiện ích đơn hàng", path: "/admin/settings/order_addon" }
     - { key: "policies", label: "Điều khoản & Chính sách", path: "/admin/settings/policies" }
+
+# Exact Live-DOM Verified Controls (for Agentic Browsing precision)
+live_dom_verified_controls:
+  "/admin/orders":
+    tabs: ["Tất cả đơn hàng", "Đơn hàng mới", "Chưa giao hàng", "Chưa thanh toán"]
+    buttons: ["Xuất dữ liệu", "Tạo đơn hàng"]
+    filters: ["Thêm điều kiện lọc", "Tìm kiếm"]
+    columns: ["Mã", "Ngày tạo", "Khách hàng", "Thanh toán", "Giao hàng", "COD", "SL sản phẩm", "Tổng tiền", "Kênh"]
+  "/admin/orders/mass_fulfill":
+    empty_state_cta: ["Tìm hiểu thêm", "Bắt đầu thiết lập"]
+  "/admin/draft_orders":
+    empty_state_cta: ["Tạo đơn"]
+  "/admin/orders/checkouts":
+    empty_state_cta: ["Tìm hiểu thêm"]
+  "/admin/shipments/packed":
+    radio_modes: ["Kiểm tra sản phẩm đóng gói", "Quét vận đơn đóng gói"]
+    checkboxes: ["Tự động xác nhận khi đã đóng gói đủ số lượng sản phẩm", "Ghi nhận kích thước đóng gói"]
+    inputs: ["Đơn hàng / Vận đơn", "Sản phẩm"]
+    shortcut_undo: "Shift+R"
+  "/admin/shipments/shipment_handovers":
+    empty_state_cta: ["Tạo biên bản"]
+  "/admin/shipments/shipment_returns":
+    empty_state_cta: ["Tạo biên bản"]
+  "/admin/products":
+    tabs: ["Tất cả sản phẩm"]
+    buttons: ["Nhập dữ liệu", "Xuất dữ liệu", "Tạo combo", "Tạo sản phẩm"]
+    filters: ["Tìm kiếm", "Bộ lọc"]
+    columns: ["Sản phẩm", "Tồn kho", "Loại", "Thương hiệu"]
+  "/admin/products/collections":
+    tabs: ["Tất cả danh mục"]
+    buttons: ["Tạo nhóm sản phẩm"]
+    filters: ["Tìm kiếm", "Bộ lọc"]
+    columns: ["Tên nhóm", "Số sản phẩm", "Điều kiện nhóm"]
+  "/admin/products/pricing_list":
+    empty_state_cta: ["Tạo bảng giá"]
+  "/admin/products/inventories":
+    tabs: ["Tất cả"]
+    buttons: ["Xuất file", "Lưu"]
+    columns: ["Sản phẩm/Biến thể", "SKU", "Barcode", "Cập nhật tồn kho", "Tồn kho"]
+  "/admin/discounts":
+    empty_state_cta: ["Gợi ý khuyến mãi", "Tạo khuyến mãi"]
+  "/admin/accounting/transactions":
+    tabs: ["Tất cả"]
+    summary_cards: ["Số dư đầu kỳ", "Tổng thu", "Tổng chi", "Số dư cuối kỳ"]
+    buttons: ["Xuất dữ liệu", "Tạo phiếu thu", "Tạo phiếu chi"]
+    filters: ["Tháng này", "Nguồn tiền", "Tìm kiếm", "Bộ lọc"]
+  "/admin/accounting/debts":
+    tabs: ["Tất cả"]
+    summary_cards: ["Nợ phải thu đầu kỳ", "Nợ phát sinh", "Nợ đã thu", "Nợ phải thu cuối kỳ"]
+    filters: ["Tháng này", "Công nợ", "Bộ lọc"]
+    columns: ["Tên nhà vận chuyển", "Nợ phải thu đầu kỳ", "Nợ phát sinh", "Nợ đã thu", "Nợ phải thu cuối kỳ"]
+  "/admin/etax/declarations":
+    heading: "Kê khai thuế cho hộ kinh doanh"
+    empty_state_cta: ["Tìm hiểu thêm", "Tạo hồ sơ kê khai"]
+  "/admin/settings/vat_setting":
+    onboarding_cta: ["Next", "Kích hoạt"]
+  "/admin/settings/policies":
+    switches: ["Yêu cầu xác nhận Điều khoản và Chính sách"]
+    policy_links: ["Điều khoản và quy định dịch vụ", "Chính sách bảo mật và quyền riêng tư", "Chính sách đổi trả"]
+  "/admin/settings/files":
+    heading: "Quản lý danh sách file"
+    buttons: ["Tải file"]
+  "/admin/settings/order_addon":
+    heading: "Quản lý kênh bán cho đơn hàng"
+    buttons: ["Thêm kênh bán hàng"]
+    columns: ["Tên kênh bán", "Mã kênh bán", "Trạng thái", "Loại"]
+  "/admin/apps":
+    buttons: ["Ứng dụng riêng", "Đến Kho ứng dụng Haravan", "Xem thêm"]

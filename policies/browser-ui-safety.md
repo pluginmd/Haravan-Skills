@@ -23,9 +23,16 @@ Mọi thao tác cấu hình trên Haravan Admin UI (`L2` & `L3`) bắt buộc tu
 - `Xuất bản (Publish)` giao diện lên Live Theme.
 - `Nâng cấp gói` / `Mua thêm` / bất kỳ nút nào phát sinh thanh toán dịch vụ Haravan (`/admin/settings/billings`).
 
-## 4. Giới hạn Cross-Origin Iframe (`https://web.haravan.app`)
-- Qua kiểm chứng thực tế trên Haravan Admin, 5 màn hình con dưới **Kênh bán hàng > Website** (`/admin/sale_channels/online_store/{themes,articles,pages,menus,settings}`) được nhúng qua **cross-origin iframe** `https://web.haravan.app`.
-- Trình duyệt sandbox bảo mật sẽ ẩn nội dung bên trong cross-origin iframe. Do đó:
-  - Với **Themes / Liquid / Assets**: dùng `@haravan/cli` (`haravan-cli-theme-ops`) hoặc Web API (`/web/themes.json`).
-  - Với **Pages / Blogs / Articles / Redirects / Script Tags**: dùng Haravan Web API (`/web/*`).
-  - Với **Menu** và **Theme Customizer** trong iframe: Agent cung cấp hướng dẫn từng bước để người dùng thao tác trực tiếp trên tab đang mở.
+## 4. Kiến trúc Cross-Origin Micro-Frontend Iframes trên Haravan Admin (`*.haravan.app`)
+Qua kiểm chứng trực tiếp trên Haravan Admin sống, có **3 phân hệ lớn** được nhúng qua **cross-origin `<iframe>`**:
+1. **Website** (`/admin/sale_channels/online_store/{themes,articles,pages,menus,settings}`) → `https://web.haravan.app`
+2. **Khách hàng / CRM** (`/admin/customers`, `/segments`, `/broadcast_campaigns`, `/flows`, `/rating`, `/settings`) → `https://customers.haravan.app`
+3. **Báo cáo** (`/admin/reports/dashboard`, `/admin/reports/listing`) → `https://reports.haravan.app`
+
+**Quy tắc xử lý thông minh cho từng loại AI Browser:**
+- **Trên Sandbox AI Browser (như Antigravity `/browser`):** Trình duyệt bảo mật sẽ tự ẩn (`redacted`) nội dung bên trong cross-origin iframe. Khi gặp iframe bị ẩn, Agent **không cố click mù**, mà tự động chuyển sang **`skills/api-mcp/`** (`/web/*`, `@haravan/cli`, `/com/customers.json`, `/com/orders.json`) hoặc hướng dẫn người dùng thao tác trực tiếp trên tab đang mở.
+- **Trên Extension / Desktop Browser (như Claude in Chrome Extension, ChatGPT Operator khi được cấp quyền origin `*.haravan.app`):** Agent có thể tương tác trực tiếp trong iframe nhưng vẫn bắt buộc tuân thủ **Screenshot-Before-Save** và không xuất PII thô.
+
+## 5. Quy tắc Semantic Matching & Empty-State Detection
+- **Empty State Onboarding View:** Các màn hình chưa phát sinh dữ liệu (`mass_fulfill`, `draft_orders`, `managecod`, `shipment_handovers`, `shipment_returns`, `pricing_list`, `discounts`, `etax/declarations`, `settings/files`) sẽ hiển thị màn hình khởi tạo với 1–2 nút CTA (ví dụ `Bắt đầu thiết lập`, `Tạo đơn`, `Tạo biên bản`, `Tạo bảng giá`, `Tạo khuyến mãi`, `Kích hoạt`) thay vì thanh bộ lọc/bảng. Agent phải kiểm tra có đang ở Empty State hay không trước khi tìm bảng dữ liệu.
+- **Semantic Fallback khi Haravan cập nhật giao diện:** Luôn ưu tiên khớp chính xác nhãn tiếng Việt trong `api/admin-ui-sitemap.yaml` (`live_dom_verified_controls`). Nếu Haravan đổi câu chữ 1–2 từ, Agent đọc Accessibility Tree + Screenshot tại đúng Route URL để khớp theo ngữ nghĩa, ghi chú sự khác biệt trong báo cáo preview và **chưa bấm Lưu** cho tới khi người dùng xác nhận.

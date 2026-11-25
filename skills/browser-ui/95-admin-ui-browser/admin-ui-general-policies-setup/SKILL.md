@@ -54,6 +54,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/general` (Sections: `Thông tin cửa hàng`, `Nhận dạng thương hiệu` [`Chọn logo`], `Địa chỉ cửa hàng`, `Tiêu chuẩn & Định dạng`, `Bán hàng`, `Quản lý sản phẩm`, `Xử lý đơn hàng`, nút `Lưu`); `/admin/settings/policies` (Switch `Yêu cầu xác nhận Điều khoản và Chính sách`; 3 link: `Điều khoản và quy định dịch vụ`, `Chính sách bảo mật và quyền riêng tư`, `Chính sách đổi trả`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/general` | `Thông tin cửa hàng` | Input text, nút `Lưu` (góc trên & dưới phải) | `Tên cửa hàng`, `Email liên hệ` (nhận thông báo từ Haravan), `Email chăm sóc khách hàng` (hiển thị cho khách), `Số điện thoại` |

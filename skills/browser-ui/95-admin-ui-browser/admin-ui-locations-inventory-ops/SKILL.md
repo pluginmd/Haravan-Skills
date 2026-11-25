@@ -55,6 +55,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/locations` — Nút `Mua thêm` (CẤM bấm), `Thêm địa điểm`; Tabs `Địa điểm hoạt động` / `Địa điểm đã khoá`; Form chi tiết `/admin/settings/locations/{id}` có checkbox `Địa điểm lấy hàng` & `Cập nhật thông tin xuất hoá đơn`.
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/locations` | Tab `Địa điểm hoạt động` / `Địa điểm đã khoá` | `Thêm địa điểm`, `Mua thêm` (HARD-BLOCKED) | Danh sách kho: Tên kho, Địa chỉ, Nhãn `Mặc định`, Bộ đếm hạn mức số lượng kho đang dùng / tối đa theo gói |

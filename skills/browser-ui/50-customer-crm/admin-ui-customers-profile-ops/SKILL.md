@@ -49,6 +49,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Section/Tab, Nhãn nút bấm, Cột bảng & Bộ lọc)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Cross-Origin Iframe (Live-Verified):** `/admin/customers` nhúng micro-frontend `https://customers.haravan.app`. Sandbox browser (như Antigravity `/browser`) sẽ ẩn DOM trong iframe → tự chuyển sang `skills/api-mcp/50-customer-crm/` hoặc chạy trực tiếp trên Claude in Chrome / ChatGPT khi mở quyền origin `customers.haravan.app`.
+
+
 | Thành phần UI | Route / Vị trí chính xác | Nhãn hiển thị thực tế (Exact UI Labels) | Ghi chú thao tác |
 | :--- | :--- | :--- | :--- |
 | Danh sách khách hàng | `/admin/customers` | Nút góc phải: `Nhập dữ liệu`, `Xuất dữ liệu` (PII — Hard-Blocked mặc định), `Tạo khách hàng` | Ô `Tìm kiếm` hỗ trợ tên, SĐT, email; Nút `Thêm điều kiện lọc` (`Nhóm KH`, `Tag`, `Tổng chi tiêu`, `Số đơn hàng`, `Tỉnh/Thành`, `Trạng thái tài khoản`) |

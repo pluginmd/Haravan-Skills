@@ -53,6 +53,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/checkouts` — 7 sections: `Tài khoản khách hàng` (3 radio + Multipass), `Cấu hình đăng nhập` (`Standard`/`Legacy`, `Email`, `Số điện thoại` OTP Zalo), `Yêu cầu nhập Email`, `Xử lý đơn hàng` (nhắc 6h/24h, tự động giao, tự động lưu trữ), `Thiết lập đặt cọc`, `Nhận tại cửa hàng`, `Ngôn ngữ`, nút `Lưu`.
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/checkouts` | 1. `Tài khoản khách hàng` | Radio buttons + nút `Lưu` (góc trên/dưới phải) | `Vô hiệu hóa`, `Bắt buộc phải có tài khoản mua hàng`, `Không ràng buộc phải có tài khoản mua hàng` (Khuyến nghị tối ưu chuyển đổi) |

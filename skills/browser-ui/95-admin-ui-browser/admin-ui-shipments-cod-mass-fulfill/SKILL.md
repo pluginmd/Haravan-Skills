@@ -54,6 +54,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/orders/mass_fulfill` (Empty CTA: `Bắt đầu thiết lập`, `Tìm hiểu thêm`); `/admin/shipments/packed` (Radio: `Kiểm tra sản phẩm đóng gói`, `Quét vận đơn đóng gói`; Checkboxes: `Tự động xác nhận khi đã đóng gói đủ số lượng sản phẩm`, `Ghi nhận kích thước đóng gói`; Inputs: `Đơn hàng / Vận đơn`, `Sản phẩm` [disabled tới khi nhập mã đơn]; Phím tắt hoàn tác: `Shift+R`); `/admin/shipments/shipment_handovers` & `shipment_returns` (CTA: `Tạo biên bản`); `/admin/shipments/managecod` (`Quản lý danh sách thu hộ`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/shipments/dashboard` | Tổng quan vận chuyển | `Lọc thời gian`, `Chọn nhà vận chuyển`, `Xem chi tiết` | Thẻ KPI: `Chờ lấy hàng`, `Đang giao hàng`, `Chờ giao lại`, `Đang chuyển hoàn`, `Đã giao`, `Chưa nhận tiền COD` |

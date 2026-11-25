@@ -55,6 +55,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Routes, Controls, Columns & Filters)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Cross-Origin Iframe (Live-Verified):** Toàn bộ `/admin/customers/{segments,broadcast_campaigns,flows,rating,settings}` nhúng `https://customers.haravan.app` (mục `broadcast_campaigns` có thể yêu cầu nâng cấp gói). Nếu sandbox browser ẩn iframe, dùng `skills/api-mcp/50-customer-crm/` hoặc thao tác trên Claude in Chrome.
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm thực tế (Exact UI Labels) | Cột bảng & Bộ lọc thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/customers/segments` | Danh sách Nhóm khách hàng | `Tạo nhóm khách hàng`, `Lọc`, `Tìm kiếm`, `Lưu` | Bộ lọc: `Loại nhóm` (`Tự động` / `Cố định`). Cột: Tên nhóm, Loại nhóm, Số lượng khách hàng, Ngày cập nhật, Hạn mức (`x/10` hoặc `x/200`) |

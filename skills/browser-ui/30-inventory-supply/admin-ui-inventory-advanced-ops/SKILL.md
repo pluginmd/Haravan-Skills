@@ -53,6 +53,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Section/Tab, Nhãn nút bấm, Cột bảng & Bộ lọc)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/products/inventories` — Tab: `Tất cả`; Nút: `Xuất file`, `Lưu`; Cột: `Sản phẩm/Biến thể`, `SKU`, `Barcode`, `Cập nhật tồn kho`, `Tồn kho`.
+
+
 | Phân hệ kho | Route / Vị trí chính xác | Nhãn hiển thị thực tế (Exact UI Labels) | Cột / Bộ lọc chính |
 | :--- | :--- | :--- | :--- |
 | Tồn kho tổng hợp | `/admin/products/inventories` | Bộ lọc `Kho hàng`, `Loại SP`, `Nhà cung cấp`; Nút `Xuất dữ liệu`, `Lịch sử tồn kho` | `Sản phẩm/SKU`, `Tồn kho`, `Đang giao dịch`, `Có thể bán`, `Hàng đang về` |

@@ -52,6 +52,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Verified Haravan Admin UI Map)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/settings/accounts` (`Thêm nhân viên`, `Mua thêm` [CẤM], `Chấm dứt các phiên đăng nhập` [CẤM], `Chọn làm chủ sở hữu` [CẤM]); `/admin/settings/group_permissions` (`Tạo vai trò`); `/admin/settings/group_accounts` (`Thêm nhóm phân công`).
+
+
 | Route / URL | Section / Tab | Nhãn nút bấm & Điều khiển (Exact UI Labels) | Trường cấu hình chính & Hành vi thực tế |
 | :--- | :--- | :--- | :--- |
 | `/admin/settings/accounts` | `Chủ cửa hàng` & `Danh sách nhân viên` | `Thêm nhân viên`, `Mua thêm` (HARD-BLOCKED), `Chọn làm chủ sở hữu` (HARD-BLOCKED), `Chấm dứt các phiên đăng nhập` (HARD-BLOCKED) | Thông tin Chủ sở hữu, danh sách nhân viên (Tên, Email, Vai trò, Trạng thái hoạt động, Lần đăng nhập gần nhất), bộ đếm hạn mức nhân viên theo gói |

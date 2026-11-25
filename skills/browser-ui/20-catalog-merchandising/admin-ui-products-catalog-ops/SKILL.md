@@ -51,6 +51,9 @@ rollback:
 
 ## 2. Bản đồ Giao diện Thực tế (Exact Route, Section/Tab, Nhãn nút bấm, Cột bảng & Bộ lọc)
 
+> **Live-DOM Verified Snapshot (`api/admin-ui-sitemap.yaml`):** **Native DOM (Live-Verified):** `/admin/products` — Tab: `Tất cả sản phẩm`; Nút: `Nhập dữ liệu`, `Xuất dữ liệu`, `Tạo combo`, `Tạo sản phẩm`; Bộ lọc: `Tìm kiếm`, `Bộ lọc`; Cột: `Sản phẩm`, `Tồn kho`, `Loại`, `Thương hiệu`. `/admin/products/collections` — Tab: `Tất cả danh mục`; Nút: `Tạo nhóm sản phẩm`; Cột: `Tên nhóm`, `Số sản phẩm`, `Điều kiện nhóm`.
+
+
 | Thành phần UI | Route / Vị trí chính xác | Nhãn hiển thị thực tế (Exact UI Labels) | Ghi chú thao tác |
 | :--- | :--- | :--- | :--- |
 | Danh sách sản phẩm | `/admin/products` | Nút góc phải: `Nhập dữ liệu`, `Xuất dữ liệu`, `Tạo sản phẩm` | Thanh lọc: `Thêm điều kiện lọc` (`Hiển thị`, `Loại sản phẩm`, `Nhà cung cấp`, `Nhóm sản phẩm`, `Tag`, `Kênh bán hàng`) |
