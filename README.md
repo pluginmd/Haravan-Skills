@@ -17,6 +17,36 @@ Bộ **88 Canonical AI Agent Skills chuẩn hóa toàn diện** được chia t�
 
 ---
 
+## 0. Hướng dẫn Định tuyến cho AI Agent (Biết ngay dùng loại Skill nào!)
+
+> **Dành cho AI Agent (Antigravity, ChatGPT, Claude, Cursor, Codex):** Đọc bảng này **trước khi bắt đầu bất kỳ tác vụ nào** để chọn đúng kênh thực thi (`skills/api-mcp/` hay `skills/browser-ui/`).
+
+### A. Công cụ AI của bạn nên dùng nhánh Skill nào?
+
+| Công cụ AI đang chạy | Nhánh Skill ưu tiên | Cần API Token? | Cách thức thao tác |
+| :--- | :--- | :---: | :--- |
+| **Antigravity** (IDE / CLI) | **Cả 2 nhánh (Hybrid)** | Tùy tác vụ | Dùng `skills/api-mcp/` (qua Terminal/MCP) cho dữ liệu lớn & audit; dùng `skills/browser-ui/` (qua `/browser`) cho cấu hình Admin UI |
+| **ChatGPT** (Internal Browser / Operator) | **`skills/browser-ui/`** | **Không** | Mở `*.myharavan.com/admin` trên trình duyệt nội bộ, đọc [registry-browser-ui.json](registry-browser-ui.json) & [admin-ui-sitemap.yaml](api/admin-ui-sitemap.yaml) để tự thao tác chuột |
+| **Claude in Chrome Extension** / Computer Use | **`skills/browser-ui/`** | **Không** | Chạy trực tiếp trên tab Chrome đã đăng nhập Haravan Admin, áp dụng luật **Screenshot-Before-Save** trong [browser-ui-safety.md](policies/browser-ui-safety.md) |
+| **Claude Code / Cursor / Codex / n8n** | **`skills/api-mcp/`** | **Có** | Đọc [registry-api-mcp.json](registry-api-mcp.json), gọi `scripts/hrv_ops.py`, `scripts/hrv_client.py` hoặc gắn [mcp/haravan_mcp_server.py](mcp/haravan_mcp_server.py) |
+
+### B. Luật chọn nhanh theo loại nghiệp vụ
+
+| Tình huống / Yêu cầu của người dùng | Chọn nhánh | Lý do |
+| :--- | :--- | :--- |
+| Quét hàng trăm/nghìn sản phẩm, đơn hàng, tồn kho, RFM, đối soát COD, báo cáo sáng/tuần/tháng | **`skills/api-mcp/`** | Nhanh, chính xác, không bị giới hạn phân trang giao diện |
+| Chỉnh sửa Theme Liquid, Pages, Blogs, Redirects, Script Tags | **`skills/api-mcp/`** | 5 màn hình Website chạy trong cross-origin iframe `web.haravan.app` nên API (`/web/*`) và `@haravan/cli` hiệu quả hơn |
+| Cấu hình **17 mục Settings** (Vận chuyển & GHN/GHTK/VTP, Thanh toán/Haravan QR/COD, Checkout/OTP Zalo, Phân quyền Vai trò, Mẫu in, Tên miền/SSL, Thuế/HĐĐT) | **`skills/browser-ui/`** | Các cấu hình này **không có API công khai**, bắt buộc thao tác bằng Agentic Browsing |
+| Vận hành trực tiếp trên Admin khi **chưa có API Token** (tạo đơn, đẩy giao hàng hàng loạt, quản lý thu hộ COD, tạo khuyến mãi, bảng giá B2B, đơn nháp, CRM Flows/Broadcast, xuất báo cáo UI) | **`skills/browser-ui/`** | Chỉ cần người dùng đăng nhập trình duyệt là AI thao tác được ngay |
+
+### C. Prompt mẫu dán vào ChatGPT / Antigravity / Claude in Chrome
+- **Chạy Agentic Browsing (không cần token):**
+  > *"Đọc `AGENTS.md`, `policies/browser-ui-safety.md`, `api/admin-ui-sitemap.yaml` và `registry-browser-ui.json`. Sử dụng trình duyệt đang đăng nhập Haravan Admin để thực hiện skill `<tên-skill>` ở chế độ Screenshot-Before-Save (chụp ảnh chờ tôi duyệt trước khi bấm Lưu)."*
+- **Chạy API / MCP / CLI (có `HARAVAN_ACCESS_TOKEN`):**
+  > *"Đọc `AGENTS.md` và `registry-api-mcp.json`. Chạy skill `<tên-skill>` qua `scripts/hrv_ops.py` hoặc `scripts/hrv_client.py` ở chế độ Read-Only / `dry_run: true` trước."*
+
+---
+
 ## 1. Tổng quan số liệu & Kiến trúc an toàn
 
 | Chỉ số | Giá trị |

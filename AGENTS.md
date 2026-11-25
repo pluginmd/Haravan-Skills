@@ -55,9 +55,10 @@ Tài liệu này quy định **luật bắt buộc** cho mọi AI Agent (Antigra
 
 ## 3. Quy trình làm việc chuẩn của Agent
 
-1. **Tra cứu đúng Loại Skill (2 Kênh Thực Thi Tách Biệt):**
-   - **Loại 1 — `skills/api-mcp/` (`execution_channel: api_mcp`, `requires_token: true`, chỉ mục [registry-api-mcp.json](registry-api-mcp.json)):** Chạy qua Haravan REST API (`/com/`, `/web/`), `scripts/hrv_ops.py`, `mcp/haravan_mcp_server.py` hoặc `@haravan/cli` — yêu cầu `HARAVAN_ACCESS_TOKEN`.
-   - **Loại 2 — `skills/browser-ui/` (`execution_channel: browser_ui`, `requires_token: false`, chỉ mục [registry-browser-ui.json](registry-browser-ui.json)):** Thao tác chuột/form trực tiếp trên trình duyệt Haravan Admin (`*.myharavan.com/admin`) — không cần API token, chỉ cần người dùng tự đăng nhập trình duyệt.
+1. **Định tuyến chọn đúng Loại Skill ngay từ đầu (2 Kênh Thực Thi Tách Biệt):**
+   - **Loại 1 — `skills/api-mcp/` (`execution_channel: api_mcp`, `requires_token: true`, chỉ mục [registry-api-mcp.json](registry-api-mcp.json)):** Dành cho **Claude Code, Cursor, Codex, Antigravity (Terminal/MCP), n8n** khi có `HARAVAN_ACCESS_TOKEN`. Dùng cho quét dữ liệu lớn, kiểm toán, báo cáo, đối soát COD, sửa hàng loạt và mọi thao tác Website (`/web/*`, `@haravan/cli`).
+   - **Loại 2 — `skills/browser-ui/` (`execution_channel: browser_ui`, `requires_token: false`, chỉ mục [registry-browser-ui.json](registry-browser-ui.json)):** Dành cho **Agentic Browsing** (**Antigravity Internal Browser `/browser`**, **ChatGPT Internal Browser / Operator**, **Claude in Chrome Extension / Computer Use**). Dùng khi không có API token hoặc khi thao tác 17 mục Cấu hình Admin (`/admin/settings/*`) và các phân hệ chỉ có trên giao diện Haravan Admin (`*.myharavan.com/admin`).
+   - **Quy tắc Hybrid (khi Agent có cả API và Browser như Antigravity):** Ưu tiên `api-mcp` để đọc/tổng hợp dữ liệu nhanh, và chuyển sang `browser-ui` cho các cấu hình/thao tác chỉ có trên Admin UI.
 2. **Đọc Contract:** Đọc YAML frontmatter của `SKILL.md` để nắm `mode`, `risk`, `scopes`, `max_records`, `pii_level`.
 3. **Kiểm tra Môi trường:** Xác nhận đang trỏ đúng `dev`/`staging` hay `production`. Với thao tác mới, luôn ưu tiên thử trên `staging`/dev store trước.
 4. **Thực thi Read / Dry-Run:** Gọi API qua `scripts/hrv_client.py`, lưu backup artifact nếu chuẩn bị ghi dữ liệu.
