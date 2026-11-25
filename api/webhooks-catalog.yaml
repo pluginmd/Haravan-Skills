@@ -1,0 +1,46 @@
+# Haravan Webhooks Catalog & Verification Specification
+
+connect_webhook:
+  subscribe_endpoint: "POST https://webhook.haravan.com/api/subscribe"
+  required_scope: "wh_api"
+  signature_header: "X-Haravan-Hmacsha256"
+  signature_algorithm: "HMAC-SHA256 (Base64 encoded) using App Client Secret or Private Webhook Secret"
+  required_headers_in_delivery:
+    - "X-Haravan-Topic"
+    - "X-Haravan-Org-Id"
+    - "X-Haravan-Hmacsha256"
+
+private_webhook:
+  admin_path: "Settings > Notifications > Webhooks (Owner account required)"
+  delivery_requirement: "HTTPS endpoint returning HTTP 200 within 5 seconds"
+
+topics:
+  orders:
+    - topic: "orders/create"
+      description: "Kích hoạt khi có đơn hàng mới từ Website, POS, Harasocial hoặc Sàn TMĐT"
+    - topic: "orders/updated"
+      description: "Kích hoạt khi đơn hàng thay đổi trạng thái, tag, ghi chú hoặc thanh toán"
+    - topic: "orders/paid"
+      description: "Kích hoạt khi đơn hàng được ghi nhận thanh toán thành công"
+    - topic: "orders/cancelled"
+      description: "Kích hoạt khi đơn hàng bị hủy"
+    - topic: "orders/fulfilled"
+      description: "Kích hoạt khi đơn hàng hoàn tất giao hàng"
+  products:
+    - topic: "products/create"
+      description: "Tạo mới sản phẩm"
+    - topic: "products/update"
+      description: "Cập nhật thông tin, giá, hình ảnh hoặc variant sản phẩm"
+    - topic: "products/deleted"
+      description: "Xóa sản phẩm"
+  inventory:
+    - topic: "inventory_locations/update"
+      description: "Thay đổi số lượng tồn kho theo chi nhánh/kho"
+  refunds:
+    - topic: "refunds/create"
+      description: "Phát sinh phiếu hoàn tiền / hoàn trả hàng"
+  customers:
+    - topic: "customers/create"
+      description: "Khách hàng mới đăng ký hoặc phát sinh từ đơn hàng"
+    - topic: "customers/update"
+      description: "Cập nhật thông tin hoặc địa chỉ khách hàng"

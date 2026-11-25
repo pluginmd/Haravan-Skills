@@ -1,0 +1,38 @@
+# Haravan Multi-Store Configuration Template
+# IMPORTANT: Copy to stores.local.yaml (gitignored). NEVER commit access tokens or secrets!
+
+default_store: staging
+
+stores:
+  staging:
+    name: "MyShop Staging"
+    domain: "myshop-staging.myharavan.com"
+    environment: staging
+    api_base_com: "https://apis.haravan.com/com"
+    api_base_web: "https://apis.haravan.com/web"
+    webhook_base: "https://webhook.haravan.com/api"
+    auth:
+      type: bearer_token # bearer_token (private app) | oauth2 (custom/public app)
+      token_env: "HARAVAN_STAGING_ACCESS_TOKEN"
+      webhook_secret_env: "HARAVAN_STAGING_WEBHOOK_SECRET"
+    currency: "VND"
+    timezone: "Asia/Ho_Chi_Minh"
+    allowed_layers: ["L0", "L1", "L2", "L3"]
+
+  production:
+    name: "MyShop Production"
+    domain: "myshop.myharavan.com"
+    environment: production
+    api_base_com: "https://apis.haravan.com/com"
+    api_base_web: "https://apis.haravan.com/web"
+    webhook_base: "https://webhook.haravan.com/api"
+    auth:
+      type: bearer_token
+      token_env: "HARAVAN_ACCESS_TOKEN"
+      webhook_secret_env: "HARAVAN_WEBHOOK_SECRET"
+    currency: "VND"
+    timezone: "Asia/Ho_Chi_Minh"
+    # Production starts with L0 + L1 read-only; unlock L2/L3 explicitly per store
+    allowed_layers: ["L0", "L1", "L2"]
+    require_staging_verification: true
+    default_location_id: null

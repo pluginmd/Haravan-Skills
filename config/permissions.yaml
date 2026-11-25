@@ -1,0 +1,75 @@
+# Haravan Least-Privilege Scope Matrix
+# Reference: https://docs.haravan.com / https://apis.haravan.com
+
+scope_catalog:
+  commerce_read:
+    - com.read_shop
+    - com.read_products
+    - com.read_orders
+    - com.read_customers
+    - com.read_inventories
+    - com.read_discounts
+    - com.read_contents
+  commerce_write:
+    - com.write_shop
+    - com.write_products
+    - com.write_orders
+    - com.write_customers
+    - com.write_inventories
+    - com.write_discounts
+    - com.write_contents
+    - com.write_script_tags
+  web_read:
+    - web.read_themes
+    - web.read_contents
+    - web.read_script_tags
+  web_write:
+    - web.write_themes
+    - web.write_contents
+    - web.write_script_tags
+  system:
+    - wh_api
+    - offline_access
+
+roles:
+  auditor_readonly:
+    description: "Wave 1 read-only operator (L1 skills only)"
+    allowed_scopes:
+      - com.read_shop
+      - com.read_products
+      - com.read_orders
+      - com.read_customers
+      - com.read_inventories
+      - com.read_discounts
+      - com.read_contents
+      - web.read_themes
+      - web.read_contents
+      - web.read_script_tags
+
+  merchandiser_proposal:
+    description: "Wave 2 catalog, pricing, inventory & marketing proposals"
+    inherits: auditor_readonly
+    additional_scopes:
+      - com.write_products
+      - com.write_inventories
+      - com.write_discounts
+      - com.write_contents
+      - web.write_contents
+
+  fulfillment_operator:
+    description: "Wave 2/3 order, fulfillment & customer support operations"
+    inherits: auditor_readonly
+    additional_scopes:
+      - com.write_orders
+      - com.write_customers
+      - com.write_inventories
+
+  theme_developer:
+    description: "Theme development via @haravan/cli on unpublished/staging theme only"
+    allowed_scopes:
+      - web.read_themes
+      - web.write_themes
+      - web.read_contents
+      - web.read_script_tags
+    restrictions:
+      - "Never mutate live theme (role=main) directly without staging backup"

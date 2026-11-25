@@ -1,0 +1,39 @@
+# Global Operation Guardrails for Haravan AI Skills
+
+defaults:
+  mode: read
+  dry_run: true
+  confirmation_required_for_write: true
+  separate_turn_for_critical: true
+  redact_pii_in_output: true
+  export_raw_pii_allowed: false
+  post_write_verification: true
+
+batch_limits:
+  L1_read:
+    max_records: 5000
+  L2_proposal:
+    max_records: 100
+    require_preview_artifact: true
+    require_backup_before_apply: true
+  L3_critical_write:
+    max_records: 25
+    require_preview_artifact: true
+    require_backup_before_apply: true
+    require_idempotency_key: true
+    partial_failure_policy: stop
+
+blocked_by_default:
+  - "Direct mutation on live theme (role=main)"
+  - "Bulk customer raw PII export without explicit approval"
+  - "Automatic order cancellation after warehouse picking has started"
+  - "Combining refund + reorder in a single unsplit transaction"
+  - "Disabling staff accounts automatically"
+  - "Modifying robots.txt.liquid on live theme automatically"
+
+financial_disclaimer:
+  required_for_domain: "60-finance-analytics"
+  notice: >-
+    Báo cáo được tổng hợp từ Haravan API nhằm mục đích ước tính vận hành và hỗ trợ đối soát
+    (Operational Estimate / Reconciliation Aid). Không thay thế sổ cái kế toán, tờ khai thuế GTGT
+    chính thức hoặc biên bản đối soát có xác nhận của đơn vị vận chuyển / cổng thanh toán.

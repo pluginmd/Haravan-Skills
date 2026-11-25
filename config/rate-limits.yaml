@@ -1,0 +1,22 @@
+# Haravan REST Omni API Rate-Limit Policy
+# Official Haravan Leaky Bucket parameters
+
+leaky_bucket:
+  bucket_size: 80
+  leak_rate_per_second: 4
+  safe_target_rps: 2.5          # Leave headroom for concurrent webhooks/POS/apps
+  burst_reserve: 10             # Pause when estimated remaining bucket <= 10
+
+retry_policy:
+  http_status_codes: [429, 500, 502, 503, 504]
+  max_retries: 5
+  initial_backoff_seconds: 1.0
+  backoff_multiplier: 2.0
+  max_backoff_seconds: 30.0
+  jitter_ratio: 0.2
+
+pagination_defaults:
+  default_limit: 50
+  max_limit: 250
+  prefer_since_id_over_page: true
+  max_pages_per_audit_run: 100  # Safety guard against runaway scans

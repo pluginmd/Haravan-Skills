@@ -1,0 +1,1065 @@
+{
+  "schema_version": "1.1.0",
+  "platform": "haravan.com",
+  "track": "browser_ui",
+  "total_skills": 26,
+  "summary": {
+    "by_channel": {
+      "browser_ui": 26
+    },
+    "by_domain": {
+      "20-catalog-merchandising": 2,
+      "30-inventory-supply": 1,
+      "40-orders-fulfillment": 3,
+      "50-customer-crm": 2,
+      "60-finance-analytics": 2,
+      "70-marketing-omnichannel": 1,
+      "80-theme-seo-cro": 2,
+      "95-admin-ui-browser": 13
+    },
+    "by_layer": {
+      "L0": 1,
+      "L1": 6,
+      "L2": 16,
+      "L3": 3
+    },
+    "by_wave": {
+      "wave_1": 7,
+      "wave_2": 16,
+      "wave_3": 3
+    },
+    "by_mode": {
+      "proposal": 16,
+      "read": 6,
+      "reference": 1,
+      "write": 3
+    }
+  },
+  "skills": [
+    {
+      "name": "admin-ui-products-catalog-ops",
+      "description": "Vận hành Sản phẩm & Nhóm sản phẩm trên Haravan Admin (/admin/products & /admin/products/collections): tạo SP đa biến thể Size/Màu + ảnh + SEO, Import/Export Excel chuẩn Haravan, Bulk Edit giá/tồn/tag/ẩn-hiện và tạo Nhóm SP thủ công/tự động.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "20-catalog-merchandising",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/products",
+          "UI /admin/products/new",
+          "UI /admin/products/{product_id}",
+          "UI /admin/products/collections"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": true
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/20-catalog-merchandising/admin-ui-products-catalog-ops/SKILL.md"
+    },
+    {
+      "name": "catalog-pricing-list-b2b-proposal",
+      "description": "Thiết kế và kiểm chuẩn Bảng giá riêng cho kênh bán hàng (Web/POS/Harasocial), chi nhánh và nhóm khách sỉ B2B (/admin/products/pricing_list).",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "20-catalog-merchandising",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": [
+          "com.read_products"
+        ],
+        "endpoints": [
+          "GET https://apis.haravan.com/com/products.json",
+          "UI /admin/products/pricing_list"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 100,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/20-catalog-merchandising/catalog-pricing-list-b2b-proposal/SKILL.md"
+    },
+    {
+      "name": "admin-ui-inventory-advanced-ops",
+      "description": "Vận hành Tồn kho Nâng cao trên Haravan Admin (/admin/products/inventories & phân hệ kho): Đặt hàng nhập PO, Nhập hàng cập nhật giá vốn, Trả hàng NCC, Điều chuyển giữa 2 kho + duyệt xuất/nhận, Kiểm kho barcode/Excel và Cân bằng kho.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "30-inventory-supply",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "high",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/products/inventories",
+          "UI /admin/purchase_orders",
+          "UI /admin/purchase_receives",
+          "UI /admin/purchase_returns",
+          "UI /admin/transfers",
+          "UI /admin/inventory_adjustments"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": true,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": true
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/30-inventory-supply/admin-ui-inventory-advanced-ops/SKILL.md"
+    },
+    {
+      "name": "admin-ui-orders-daily-ops",
+      "description": "Vận hành Đơn hàng hàng ngày trên Haravan Admin (/admin/orders): lọc đa điều kiện, tạo đơn thủ công, xác nhận thanh toán chuyển khoản, gắn tag/ghi chú, tách giao hàng, sửa địa chỉ đơn chưa giao và in phiếu đơn/vận đơn.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "40-orders-fulfillment",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/orders",
+          "UI /admin/orders/new",
+          "UI /admin/orders/{order_id}"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/40-orders-fulfillment/admin-ui-orders-daily-ops/SKILL.md"
+    },
+    {
+      "name": "draft-orders-quote-proposal",
+      "description": "Chuẩn hóa quy trình lập Đơn hàng nháp (/admin/draft_orders) cho báo giá khách sỉ B2B, đơn đặt qua Zalo/Harasocial và theo dõi chuyển đổi.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "40-orders-fulfillment",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": [
+          "com.read_products",
+          "com.read_inventories",
+          "com.read_customers"
+        ],
+        "endpoints": [
+          "GET https://apis.haravan.com/com/products.json",
+          "GET https://apis.haravan.com/com/inventory_locations.json",
+          "UI /admin/draft_orders"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/40-orders-fulfillment/draft-orders-quote-proposal/SKILL.md"
+    },
+    {
+      "name": "order-abandoned-checkouts-audit",
+      "description": "Phân tích danh sách đơn chưa hoàn tất (/admin/orders/checkouts) để tìm nguyên nhân khách bỏ giỏ tại bước thanh toán/vận chuyển.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "40-orders-fulfillment",
+      "layer": "L1",
+      "wave": 1,
+      "mode": "read",
+      "risk": "low",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": [
+          "com.read_orders"
+        ],
+        "endpoints": [
+          "UI /admin/orders/checkouts",
+          "GET https://apis.haravan.com/com/orders.json"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": false,
+        "separate_turn": false,
+        "max_records": 500,
+        "idempotency_required": false,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": false
+      },
+      "path": "skills/browser-ui/40-orders-fulfillment/order-abandoned-checkouts-audit/SKILL.md"
+    },
+    {
+      "name": "admin-ui-customers-profile-ops",
+      "description": "Vận hành Hồ sơ Khách hàng trên Haravan Admin (/admin/customers): tìm theo SĐT Việt Nam, tạo khách mới, sửa địa chỉ/tag/ghi chú, tra cứu lịch sử đơn & điểm Haraloyalty, xử lý khách trùng SĐT và Import/Export có kiểm soát PII.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "50-customer-crm",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/customers",
+          "UI /admin/customers/new",
+          "UI /admin/customers/{customer_id}"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/50-customer-crm/admin-ui-customers-profile-ops/SKILL.md"
+    },
+    {
+      "name": "customer-review-rating-moderation",
+      "description": "Kiểm toán đánh giá sản phẩm (/admin/customers/rating), phát hiện sớm SKU có điểm thấp (1–2 sao) và đề xuất kịch bản phản hồi CSKH.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "50-customer-crm",
+      "layer": "L1",
+      "wave": 1,
+      "mode": "read",
+      "risk": "low",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": [
+          "com.read_products"
+        ],
+        "endpoints": [
+          "UI /admin/customers/rating"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": false,
+        "separate_turn": false,
+        "max_records": 500,
+        "idempotency_required": false,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": false
+      },
+      "path": "skills/browser-ui/50-customer-crm/customer-review-rating-moderation/SKILL.md"
+    },
+    {
+      "name": "admin-ui-reports-analytics-export",
+      "description": "Khai thác & xuất Báo cáo trên Haravan Admin (/admin/reports/dashboard & /admin/reports/listing): Bán hàng đa kênh, Chi tiết khuyến mãi, Lợi nhuận, Tồn kho, Công nợ COD và Báo cáo khách hàng RFM theo bộ lọc ngày/chi nhánh/kênh.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "60-finance-analytics",
+      "layer": "L1",
+      "wave": 1,
+      "mode": "read",
+      "risk": "low",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/reports/dashboard",
+          "UI /admin/reports/listing"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": false,
+        "separate_turn": false,
+        "max_records": 100,
+        "idempotency_required": false,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "financial",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": false
+      },
+      "path": "skills/browser-ui/60-finance-analytics/admin-ui-reports-analytics-export/SKILL.md"
+    },
+    {
+      "name": "finance-cashbook-debt-audit",
+      "description": "Rà soát Sổ quỹ thu chi (/admin/accounting/transactions) và Công nợ (/admin/accounting/debts) để phát hiện khoản treo quá hạn.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "60-finance-analytics",
+      "layer": "L1",
+      "wave": 1,
+      "mode": "read",
+      "risk": "low",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": [
+          "com.read_orders"
+        ],
+        "endpoints": [
+          "UI /admin/accounting/transactions",
+          "UI /admin/accounting/debts"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": false,
+        "separate_turn": false,
+        "max_records": 1000,
+        "idempotency_required": false,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "financial",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": false
+      },
+      "path": "skills/browser-ui/60-finance-analytics/finance-cashbook-debt-audit/SKILL.md"
+    },
+    {
+      "name": "admin-ui-discounts-promotions-ops",
+      "description": "Quản lý Khuyến mãi trên Haravan Admin (/admin/discounts): cấu hình 4 loại mã giảm giá (đơn hàng, sản phẩm, đồng giá, vận chuyển), Mua X tặng Y, Dùng chung khuyến mãi (Grow/Scale+), giới hạn kênh/chi nhánh/nhóm khách và bật/tắt/nhân bản.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "70-marketing-omnichannel",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/discounts",
+          "UI /admin/discounts/new",
+          "UI /admin/discounts/{discount_id}"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 25,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": true
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/70-marketing-omnichannel/admin-ui-discounts-promotions-ops/SKILL.md"
+    },
+    {
+      "name": "admin-ui-website-theme-menu-assist",
+      "description": "Vận hành Website Haravan (/admin/sale_channels/online_store/{themes,articles,pages,menus,settings}): xử lý thông minh giới hạn cross-origin iframe web.haravan.app, định tuyến Hybrid sang Web API/@haravan/cli và hướng dẫn Assisted-UI cho Menu đa cấp & Theme Customizer.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "80-theme-seo-cro",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/sale_channels/online_store/themes",
+          "UI /admin/sale_channels/online_store/articles",
+          "UI /admin/sale_channels/online_store/pages",
+          "UI /admin/sale_channels/online_store/menus",
+          "UI /admin/sale_channels/online_store/settings"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 25,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/80-theme-seo-cro/admin-ui-website-theme-menu-assist/SKILL.md"
+    },
+    {
+      "name": "storefront-file-storage-audit",
+      "description": "Kiểm toán kho tệp tin (/admin/settings/files) để phát hiện ảnh/video quá nặng (> 500KB) làm chậm Core Web Vitals và tệp rác không sử dụng.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "80-theme-seo-cro",
+      "layer": "L1",
+      "wave": 1,
+      "mode": "read",
+      "risk": "low",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/files"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": false,
+        "separate_turn": false,
+        "max_records": 500,
+        "idempotency_required": false,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": false
+      },
+      "path": "skills/browser-ui/80-theme-seo-cro/storefront-file-storage-audit/SKILL.md"
+    },
+    {
+      "name": "admin-ui-apps-addons-billing",
+      "description": "Quản lý & kiểm toán chỉ đọc trên Haravan Admin: danh sách Ứng dụng (/admin/apps), kiểm tra Private App/OAuth, Tiện ích đơn hàng (/admin/settings/order_addon) và rà soát Gói dịch vụ / Hóa đơn (/admin/settings/billings).",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L1",
+      "wave": 1,
+      "mode": "read",
+      "risk": "low",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/apps",
+          "UI /admin/settings/order_addon",
+          "UI /admin/settings/billings"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": false,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": false,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": false
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-apps-addons-billing/SKILL.md"
+    },
+    {
+      "name": "admin-ui-checkout-settings",
+      "description": "Cấu hình luồng đặt hàng tại /admin/settings/checkouts: tài khoản khách hàng, Multipass, xác thực OTP Zalo, nhắc đơn chưa thanh toán, đặt cọc và nhận tại cửa hàng.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/checkouts"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 20,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-checkout-settings/SKILL.md"
+    },
+    {
+      "name": "admin-ui-crm-flows-broadcast",
+      "description": "Vận hành CRM nâng cao trên Admin UI: Nhóm khách hàng (/admin/customers/segments), Broadcast (/admin/customers/broadcast_campaigns), Kịch bản tự động (/admin/customers/flows) và Thành viên.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/customers/segments",
+          "UI /admin/customers/broadcast_campaigns",
+          "UI /admin/customers/flows",
+          "UI /admin/customers/rating",
+          "UI /admin/customers/settings"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-crm-flows-broadcast/SKILL.md"
+    },
+    {
+      "name": "admin-ui-domains-channels-website",
+      "description": "Quản lý Tên miền (/admin/settings/domains), Kênh bán hàng (/admin/settings/sale_channels), Kênh marketing (/admin/settings/marketing_channels) và hướng dẫn xử lý iframe Website.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L3",
+      "wave": 3,
+      "mode": "write",
+      "risk": "critical",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/domains",
+          "UI /admin/settings/sale_channels",
+          "UI /admin/settings/marketing_channels",
+          "UI /admin/sale_channels/online_store/themes",
+          "UI /admin/sale_channels/online_store/menus"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": true,
+        "max_records": 10,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-domains-channels-website/SKILL.md"
+    },
+    {
+      "name": "admin-ui-general-policies-setup",
+      "description": "Cấu hình thông tin cửa hàng, logo, tiêu chuẩn định dạng (/admin/settings/general) và Điều khoản & Chính sách (/admin/settings/policies) trên trình duyệt.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/general",
+          "UI /admin/settings/policies"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 20,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-general-policies-setup/SKILL.md"
+    },
+    {
+      "name": "admin-ui-locations-inventory-ops",
+      "description": "Cấu hình Địa chỉ & Kho hàng (/admin/settings/locations), bật Địa điểm lấy hàng / xuất hóa đơn, và quản lý Bảng giá đa kênh (/admin/products/pricing_list).",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/locations",
+          "UI /admin/products/pricing_list",
+          "UI /admin/products/inventories"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-locations-inventory-ops/SKILL.md"
+    },
+    {
+      "name": "admin-ui-notifications-print-webhooks",
+      "description": "Quản lý 13 mẫu Email khách hàng, Mẫu in (Đơn hàng/Vận đơn/Tồn kho), Thông báo đơn hàng nội bộ và Private Webhooks tại /admin/settings/notifications.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/notifications"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 30,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-notifications-print-webhooks/SKILL.md"
+    },
+    {
+      "name": "admin-ui-payment-methods-setup",
+      "description": "Cấu hình Haravan QR, Cổng thanh toán trực tuyến (VNPay, MoMo, ZaloPay) và Thanh toán thủ công (COD, Chuyển khoản) tại /admin/settings/payments.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L3",
+      "wave": 3,
+      "mode": "write",
+      "risk": "critical",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/payments"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": true,
+        "max_records": 10,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "financial",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-payment-methods-setup/SKILL.md"
+    },
+    {
+      "name": "admin-ui-session-navigator",
+      "description": "Quy chuẩn điều hướng Haravan Admin (*.myharavan.com/admin), xử lý đăng nhập/2FA, bản đồ 17 mục Cấu hình và luật Screenshot-Before-Save.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L0",
+      "wave": 1,
+      "mode": "reference",
+      "risk": "low",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI https://accounts.haravan.com",
+          "UI /admin/dashboard/generals",
+          "UI /admin/settings"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": false,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": false,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": false
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-session-navigator/SKILL.md"
+    },
+    {
+      "name": "admin-ui-shipments-cod-mass-fulfill",
+      "description": "Điều phối giao hàng hàng loạt (/admin/orders/mass_fulfill), Quản lý thu hộ COD (/admin/shipments/managecod), Đóng gói, Biên bản bàn giao & Hoàn hàng.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "high",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/orders/mass_fulfill",
+          "UI /admin/shipments/dashboard",
+          "UI /admin/shipments/managecod",
+          "UI /admin/shipments/packed",
+          "UI /admin/shipments/shipment_handovers",
+          "UI /admin/shipments/shipment_returns"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": true,
+        "max_records": 25,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-shipments-cod-mass-fulfill/SKILL.md"
+    },
+    {
+      "name": "admin-ui-shipping-carriers-setup",
+      "description": "Cấu hình biểu phí vận chuyển theo khu vực/Tỉnh-Thành, kết nối NVC VN (GHN, GHTK, Viettel Post, J&T, Ahamove) và kích thước kiện hàng tại /admin/settings/shipments.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "medium",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/shipments",
+          "UI /admin/settings/locations"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": false,
+        "max_records": 50,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "none",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": true,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-shipping-carriers-setup/SKILL.md"
+    },
+    {
+      "name": "admin-ui-staff-roles-config",
+      "description": "Thiết lập Vai trò phân quyền (/admin/settings/group_permissions), Nhóm phân công (/admin/settings/group_accounts) và Nhân viên (/admin/settings/accounts).",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L3",
+      "wave": 3,
+      "mode": "write",
+      "risk": "critical",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/accounts",
+          "UI /admin/settings/group_permissions",
+          "UI /admin/settings/group_accounts"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": true,
+        "max_records": 20,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "customer",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-staff-roles-config/SKILL.md"
+    },
+    {
+      "name": "admin-ui-tax-einvoice-accounting",
+      "description": "Kiểm tra & hỗ trợ thiết lập Thuế/Hóa đơn điện tử (/admin/settings/vat_setting), Tờ khai thuế (/admin/etax/declarations), Sổ kế toán & Sổ quỹ/Công nợ.",
+      "version": "1.0.0",
+      "execution_channel": "browser_ui",
+      "requires_token": false,
+      "domain": "95-admin-ui-browser",
+      "layer": "L2",
+      "wave": 2,
+      "mode": "proposal",
+      "risk": "high",
+      "haravan": {
+        "api_surface": "admin_ui",
+        "scopes": {},
+        "endpoints": [
+          "UI /admin/settings/vat_setting",
+          "UI /admin/etax/declarations",
+          "UI /admin/etax/revenue_ledgers",
+          "UI /admin/accounting/transactions",
+          "UI /admin/accounting/debts"
+        ]
+      },
+      "execution": {
+        "dry_run": true,
+        "confirmation_required": true,
+        "separate_turn": true,
+        "max_records": 25,
+        "idempotency_required": true,
+        "partial_failure_policy": "stop"
+      },
+      "privacy": {
+        "pii_level": "financial",
+        "redact_output": true,
+        "export_allowed": false
+      },
+      "rollback": {
+        "supported": false,
+        "backup_required": true
+      },
+      "path": "skills/browser-ui/95-admin-ui-browser/admin-ui-tax-einvoice-accounting/SKILL.md"
+    }
+  ]
+}

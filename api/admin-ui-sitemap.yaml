@@ -1,0 +1,124 @@
+# Haravan Admin Live UI Sitemap (Verified on Live Haravan Admin)
+# Base URL: https://{store_domain} (e.g. https://myshop.myharavan.com)
+
+verified_environment:
+  login_url: "https://accounts.haravan.com"
+  admin_home: "/admin/dashboard/generals"
+  quick_search_shortcut: "Ctrl+K"
+
+sidebar_navigation:
+  overview:
+    label: "Tổng quan"
+    path: "/admin/dashboard/generals"
+
+  orders:
+    label: "Đơn hàng"
+    path: "/admin/orders"
+    children:
+      - { label: "Tất cả đơn hàng", path: "/admin/orders" }
+      - { label: "Đơn hàng nháp", path: "/admin/draft_orders" }
+      - { label: "Chưa hoàn tất", path: "/admin/orders/checkouts" }
+      - { label: "Giao hàng hàng loạt", path: "/admin/orders/mass_fulfill" }
+
+  shipments:
+    label: "Vận chuyển"
+    path: "/admin/shipments/dashboard"
+    children:
+      - { label: "Tổng quan", path: "/admin/shipments/dashboard" }
+      - { label: "Vận chuyển", path: "/admin/shipments" }
+      - { label: "Quản lý thu hộ", path: "/admin/shipments/managecod" }
+      - { label: "Đóng gói", path: "/admin/shipments/packed" }
+      - { label: "Biên bản bàn giao", path: "/admin/shipments/shipment_handovers" }
+      - { label: "Biên bản hoàn hàng", path: "/admin/shipments/shipment_returns" }
+
+  products:
+    label: "Sản phẩm"
+    path: "/admin/products"
+    children:
+      - { label: "Tất cả sản phẩm", path: "/admin/products" }
+      - { label: "Nhóm sản phẩm", path: "/admin/products/collections" }
+      - { label: "Bảng giá", path: "/admin/products/pricing_list" }
+      - { label: "Tồn kho", path: "/admin/products/inventories" }
+
+  customers:
+    label: "Khách hàng"
+    path: "/admin/customers"
+    children:
+      - { label: "Tất cả khách hàng", path: "/admin/customers" }
+      - { label: "Nhóm khách hàng", path: "/admin/customers/segments" }
+      - { label: "Chiến dịch Broadcast", path: "/admin/customers/broadcast_campaigns" }
+      - { label: "Kịch bản tự động", path: "/admin/customers/flows" }
+      - { label: "Quản lý đánh giá", path: "/admin/customers/rating" }
+      - { label: "Cấu hình thành viên", path: "/admin/customers/settings" }
+
+  accounting:
+    label: "Sổ quỹ"
+    path: "/admin/accounting/transactions"
+    children:
+      - { label: "Sổ quỹ", path: "/admin/accounting/transactions" }
+      - { label: "Công nợ", path: "/admin/accounting/debts" }
+
+  discounts:
+    label: "Khuyến mãi"
+    path: "/admin/discounts"
+
+  reports:
+    label: "Báo cáo"
+    path: "/admin/reports/dashboard"
+    children:
+      - { label: "Bảng phân tích", path: "/admin/reports/dashboard" }
+      - { label: "Danh sách báo cáo", path: "/admin/reports/listing" }
+
+  etax:
+    label: "Thuế & kế toán"
+    path: "/admin/etax/declarations"
+    children:
+      - { label: "Tờ khai thuế", path: "/admin/etax/declarations" }
+      - { label: "Sổ kế toán", path: "/admin/etax/revenue_ledgers" }
+
+  marketing:
+    label: "Marketing"
+    path: "/admin/settings/marketing_channels"
+    children:
+      - { label: "TikTok Ads", path: "/admin/marketings/tiktok_ads/products" }
+      - { label: "Google Ads", path: "/admin/googleshop" }
+
+  sale_channels:
+    label: "Kênh bán hàng"
+    path: "/admin/settings/sale_channels"
+    website_iframe_origin: "https://web.haravan.app"
+    website_children:
+      - { label: "Giao diện", path: "/admin/sale_channels/online_store/themes", cross_origin_iframe: true }
+      - { label: "Blogs", path: "/admin/sale_channels/online_store/articles", cross_origin_iframe: true }
+      - { label: "Trang nội dung", path: "/admin/sale_channels/online_store/pages", cross_origin_iframe: true }
+      - { label: "Menu", path: "/admin/sale_channels/online_store/menus", cross_origin_iframe: true }
+      - { label: "Cấu hình Website", path: "/admin/sale_channels/online_store/settings", cross_origin_iframe: true }
+    external_apps:
+      - { label: "Haravan POS", url: "https://pos.haravan.app" }
+      - { label: "Harasocial", url: "https://app.harasocial.com" }
+
+  apps:
+    label: "Ứng dụng"
+    path: "/admin/apps"
+
+settings_hub:
+  path: "/admin/settings"
+  total_items: 17
+  items:
+    - { key: "general", label: "Cấu hình chung", path: "/admin/settings/general" }
+    - { key: "accounts", label: "Nhân viên", path: "/admin/settings/accounts" }
+    - { key: "group_permissions", label: "Vai trò", path: "/admin/settings/group_permissions" }
+    - { key: "group_accounts", label: "Nhóm phân công", path: "/admin/settings/group_accounts" }
+    - { key: "locations", label: "Địa chỉ và kho hàng", path: "/admin/settings/locations" }
+    - { key: "shipments", label: "Vận chuyển", path: "/admin/settings/shipments" }
+    - { key: "payments", label: "Phương thức thanh toán", path: "/admin/settings/payments" }
+    - { key: "checkouts", label: "Thanh toán", path: "/admin/settings/checkouts" }
+    - { key: "sale_channels", label: "Kênh bán hàng", path: "/admin/settings/sale_channels" }
+    - { key: "marketing_channels", label: "Kênh marketing", path: "/admin/settings/marketing_channels" }
+    - { key: "files", label: "Quản lý file", path: "/admin/settings/files" }
+    - { key: "notifications", label: "Thông báo", path: "/admin/settings/notifications" }
+    - { key: "billings", label: "Billing", path: "/admin/settings/billings" }
+    - { key: "vat_setting", label: "Thuế & hóa đơn điện tử", path: "/admin/settings/vat_setting" }
+    - { key: "domains", label: "Tên miền", path: "/admin/settings/domains" }
+    - { key: "order_addon", label: "Tiện ích đơn hàng", path: "/admin/settings/order_addon" }
+    - { key: "policies", label: "Điều khoản & Chính sách", path: "/admin/settings/policies" }

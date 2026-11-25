@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "haravan-ops": {
+      "command": "python3",
+      "args": ["/home/jimmy/Drive/Projects/Haravan/mcp/haravan_mcp_server.py"],
+      "env": {
+        "HARAVAN_ACCESS_TOKEN": "${HARAVAN_ACCESS_TOKEN}",
+        "HARAVAN_STORE_DOMAIN": "${HARAVAN_STORE_DOMAIN}"
+      }
+    }
+  }
+}

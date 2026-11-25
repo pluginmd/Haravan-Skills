@@ -1,0 +1,105 @@
+# Haravan Scheduled Operational Routines (16 Routines)
+# Timezone: Asia/Ho_Chi_Minh (UTC+7)
+# All scheduled routines run in Read-Only (L1) or Dry-Run Proposal (L2) mode ONLY.
+
+timezone: "Asia/Ho_Chi_Minh"
+
+daily:
+  - id: morning-store-briefing
+    cron: "0 8 * * *"
+    skill: ops-daily-morning-briefing
+    mode: read
+    description: "Bản tin đầu ngày: doanh thu hôm qua, đơn chờ xử lý, tồn kho sắp hết, cảnh báo COD"
+
+  - id: low-stock-watchdog
+    cron: "0 9,15 * * *"
+    skill: inventory-low-stock-watchdog
+    mode: read
+    description: "Quét SKU sắp hết hàng trên các chi nhánh/kho Haravan"
+
+  - id: cod-boom-risk-sentinel
+    cron: "*/30 8-22 * * *"
+    skill: order-risk-cod-boom-signals
+    mode: read
+    description: "Phát hiện sớm đơn COD có tín hiệu rủi ro boom hàng để CSKH gọi xác nhận"
+
+  - id: fulfillment-sla-watchdog
+    cron: "0 11,17 * * *"
+    skill: fulfillment-carrier-sla-vn
+    mode: read
+    description: "Cảnh báo đơn giao chậm quá SLA của GHN/GHTK/VTP/J&T"
+
+  - id: abandoned-cart-patrol
+    cron: "0 10,16 * * *"
+    skill: marketing-cart-recovery-zns
+    mode: proposal
+    dry_run: true
+    description: "Lập danh sách đề xuất nhắc giỏ hàng bỏ quên qua Email/Zalo ZNS"
+
+  - id: omnichannel-sync-watchdog
+    cron: "0 10,14,18 * * *"
+    skill: omnichannel-marketplace-sync-audit
+    mode: read
+    description: "Kiểm tra lệch tồn/đơn đồng bộ giữa Haraweb, Harasocial, POS và Shopee/Lazada/TikTok"
+
+weekly:
+  - id: weekly-business-review
+    cron: "0 8 * * 1"
+    skill: ops-weekly-business-review
+    mode: read
+    description: "Báo cáo tổng kết tuần (doanh thu đa kênh, AOV, tỷ lệ hoàn, top SKU)"
+
+  - id: cod-reconciliation-weekly
+    cron: "0 9 * * 2"
+    skill: finance-cod-reconciliation
+    mode: read
+    description: "Đối soát COD tuần giữa Haravan và biên bản NVC"
+
+  - id: catalog-health-weekly
+    cron: "0 9 * * 3"
+    skill: catalog-data-completeness-audit
+    mode: read
+    description: "Kiểm tra sản phẩm thiếu ảnh, thiếu SKU, thiếu mô tả hoặc giá vốn"
+
+  - id: seo-coverage-weekly
+    cron: "0 10 * * 4"
+    skill: seo-metadata-serp-audit
+    mode: read
+    description: "Rà soát tiêu đề SEO, meta description, redirect và link hỏng"
+
+  - id: dead-stock-weekly
+    cron: "0 10 * * 5"
+    skill: inventory-aging-dead-stock
+    mode: read
+    description: "Phát hiện hàng tồn lâu không luân chuyển (30/60/90 ngày)"
+
+  - id: customer-churn-watch
+    cron: "0 9 * * 6"
+    skill: customer-vip-churn-watchlist
+    mode: read
+    description: "Phát hiện khách VIP lâu chưa quay lại mua hàng"
+
+  - id: promotion-hygiene-weekly
+    cron: "0 14 * * 5"
+    skill: marketing-promotion-hygiene-audit
+    mode: read
+    description: "Rà soát mã giảm giá hết hạn, chồng khuyến mãi hoặc ăn mòn biên lợi nhuận"
+
+monthly:
+  - id: monthly-financial-close
+    cron: "0 8 1 * *"
+    skill: ops-monthly-financial-close
+    mode: read
+    description: "Tổng hợp ước tính tài chính tháng: doanh thu thuần, hoàn hủy, chi phí ship, VAT"
+
+  - id: staff-permission-audit-monthly
+    cron: "0 9 2 * *"
+    skill: store-staff-permission-audit
+    mode: read
+    description: "Kiểm tra danh sách tài khoản nhân viên và quyền truy cập trên Haravan"
+
+  - id: rfm-cohort-monthly
+    cron: "0 9 3 * *"
+    skill: customer-rfm-segmentation
+    mode: read
+    description: "Phân khúc khách hàng RFM và đánh giá giữ chân theo cohort tháng"

@@ -1,0 +1,47 @@
+{
+  "name": "Haravan Order Create Webhook -> Verify HMAC -> COD Risk Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "haravan-orders-create",
+        "responseMode": "onReceived",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "id": "webhook-trigger",
+      "name": "Haravan Webhook (orders/create)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const crypto = require('crypto');\nconst secret = $env.HARAVAN_WEBHOOK_SECRET || '';\nconst headerHmac = ($input.item.json.headers['x-haravan-hmacsha256'] || '').trim();\nconst rawBody = $input.item.binary?.data ? Buffer.from($input.item.binary.data.data, 'base64') : Buffer.from(JSON.stringify($input.item.json.body || {}));\nconst computed = crypto.createHmac('sha256', secret).update(rawBody).digest('base64');\nconst verified = secret.length > 0 && headerHmac.length === computed.length && crypto.timingSafeEqual(Buffer.from(computed), Buffer.from(headerHmac));\nconst order = $input.item.json.body || {};\nconst isCod = (order.gateway || '').toLowerCase().includes('cod') || (order.financial_status === 'pending');\nconst totalPrice = Number(order.total_price || 0);\nconst missingAddress = !(order.shipping_address && order.shipping_address.address1 && order.shipping_address.ward);\nconst riskFlags = [];\nif (isCod && totalPrice >= 3000000) riskFlags.push('HIGH_VALUE_COD');\nif (missingAddress) riskFlags.push('INCOMPLETE_VN_ADDRESS');\nreturn { json: { verified, order_id: order.id, order_name: order.name, total_price: totalPrice, is_cod: isCod, risk_flags: riskFlags, needs_cs_call: riskFlags.length > 0 } };"
+      },
+      "id": "verify-and-score",
+      "name": "Verify HMAC & Score COD Risk",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [520, 300]
+    }
+  ],
+  "connections": {
+    "Haravan Webhook (orders/create)": {
+      "main": [
+        [
+          {
+            "node": "Verify HMAC & Score COD Risk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

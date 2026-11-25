@@ -1,0 +1,166 @@
+# Haravan Official REST API Endpoints Catalog
+# Base Commerce: https://apis.haravan.com/com
+# Base Web:      https://apis.haravan.com/web
+
+commerce_api:
+  base_url: "https://apis.haravan.com/com"
+  resources:
+    shop:
+      read_scope: com.read_shop
+      write_scope: com.write_shop
+      endpoints:
+        - "GET /shop.json"
+        - "GET /locations.json"
+        - "GET /locations/{location_id}.json"
+        - "GET /users.json"
+        - "GET /countries/{country_id}/provinces.json"
+
+    products:
+      read_scope: com.read_products
+      write_scope: com.write_products
+      endpoints:
+        - "GET /products.json"
+        - "GET /products/count.json"
+        - "GET /products/{product_id}.json"
+        - "POST /products.json"
+        - "PUT /products/{product_id}.json"
+        - "DELETE /products/{product_id}.json"
+        - "GET /products/{product_id}/variants.json"
+        - "PUT /variants/{variant_id}.json"
+        - "GET /products/{product_id}/images.json"
+        - "PUT /products/{product_id}/images/{image_id}.json"
+
+    collections:
+      read_scope: com.read_products
+      write_scope: com.write_products
+      endpoints:
+        - "GET /custom_collections.json"
+        - "POST /custom_collections.json"
+        - "PUT /custom_collections/{collection_id}.json"
+        - "GET /smart_collections.json"
+        - "POST /smart_collections.json"
+        - "GET /collects.json"
+        - "POST /collects.json"
+        - "DELETE /collects/{collect_id}.json"
+
+    inventories:
+      read_scope: com.read_inventories
+      write_scope: com.write_inventories
+      endpoints:
+        - "GET /inventory_locations.json"
+        - "POST /inventories/adjustments.json"
+        - "GET /inventories/transfers.json"
+        - "POST /inventories/transfers.json"
+        - "GET /inventories/purchase_orders.json"
+        - "GET /v2/inventories/purchase_receives.json"
+
+    orders:
+      read_scope: com.read_orders
+      write_scope: com.write_orders
+      endpoints:
+        - "GET /orders.json"
+        - "GET /orders/count.json"
+        - "GET /orders/{order_id}.json"
+        - "POST /orders.json"
+        - "PUT /orders/{order_id}.json"
+        - "POST /orders/{order_id}/cancel.json"
+        - "POST /orders/{order_id}/close.json"
+        - "POST /orders/{order_id}/open.json"
+        - "POST /orders/{order_id}/tags.json"
+        - "DELETE /orders/{order_id}/tags.json"
+
+    fulfillments:
+      read_scope: com.read_orders
+      write_scope: com.write_orders
+      endpoints:
+        - "GET /orders/{order_id}/fulfillments.json"
+        - "POST /orders/{order_id}/fulfillments.json"
+        - "PUT /fulfillments/{fulfillment_id}.json"
+        - "POST /orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json"
+
+    refunds_and_transactions:
+      read_scope: com.read_orders
+      write_scope: com.write_orders
+      endpoints:
+        - "GET /orders/{order_id}/refunds.json"
+        - "GET /orders/{order_id}/refunds/{refund_id}.json"
+        - "POST /orders/{order_id}/refunds.json"
+        - "GET /orders/{order_id}/transactions.json"
+        - "POST /orders/{order_id}/transactions.json"
+
+    customers:
+      read_scope: com.read_customers
+      write_scope: com.write_customers
+      endpoints:
+        - "GET /customers.json"
+        - "GET /customers/count.json"
+        - "GET /customers/{customer_id}.json"
+        - "POST /customers.json"
+        - "PUT /customers/{customer_id}.json"
+        - "GET /customers/{customer_id}/addresses.json"
+        - "PUT /customers/{customer_id}/addresses/{address_id}.json"
+
+    promotions_and_discounts:
+      read_scope: com.read_discounts
+      write_scope: com.write_discounts
+      endpoints:
+        - "GET /promotions.json"
+        - "GET /promotions/{promotion_id}.json"
+        - "POST /promotions.json"
+        - "DELETE /promotions/{promotion_id}.json"
+        - "PUT /discounts/{promotion_id}/enable.json"
+        - "PUT /discounts/{promotion_id}/disable.json"
+
+    metafields:
+      read_scope: com.read_products
+      write_scope: com.write_products
+      endpoints:
+        - "GET /metafields.json"
+        - "GET /products/{product_id}/metafields.json"
+        - "POST /products/{product_id}/metafields.json"
+        - "GET /variants/{variant_id}/metafields.json"
+        - "GET /collections/{collection_id}/metafields.json"
+        - "GET /customers/{customer_id}/metafields.json"
+        - "GET /orders/{order_id}/metafields.json"
+
+web_api:
+  base_url: "https://apis.haravan.com/web"
+  resources:
+    themes_and_assets:
+      read_scope: web.read_themes
+      write_scope: web.write_themes
+      endpoints:
+        - "GET /themes.json"
+        - "GET /themes/{theme_id}.json"
+        - "POST /themes.json"
+        - "PUT /themes/{theme_id}.json"
+        - "DELETE /themes/{theme_id}.json"
+        - "GET /themes/{theme_id}/assets.json"
+        - "GET /themes/{theme_id}/assets.json?asset[key]={key}"
+        - "PUT /themes/{theme_id}/assets.json"
+        - "DELETE /themes/{theme_id}/assets.json?asset[key]={key}"
+
+    content_and_seo:
+      read_scope: com.read_contents
+      write_scope: com.write_contents
+      endpoints:
+        - "GET /pages.json"
+        - "POST /pages.json"
+        - "PUT /pages/{page_id}.json"
+        - "GET /blogs.json"
+        - "GET /blogs/{blog_id}/articles.json"
+        - "POST /blogs/{blog_id}/articles.json"
+        - "PUT /blogs/{blog_id}/articles/{article_id}.json"
+        - "GET /redirects.json"
+        - "POST /redirects.json"
+        - "PUT /redirects/{redirect_id}.json"
+        - "DELETE /redirects/{redirect_id}.json"
+
+    script_tags:
+      read_scope: web.read_script_tags
+      write_scope: com.write_script_tags
+      endpoints:
+        - "GET /script_tags.json"
+        - "POST /script_tags.json"
+        - "PUT /script_tags/{script_tag_id}.json"
+        - "DELETE /script_tags/{script_tag_id}.json"

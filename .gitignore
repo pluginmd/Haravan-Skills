@@ -1,0 +1,15 @@
+# Secrets & local store credentials (NEVER commit!)
+.env
+.env.*
+config/stores.local.yaml
+
+# Dry-run previews, backups & PII temporary artifacts
+*.backup.json
+*.preview.csv
+artifacts/
+scratch/
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
